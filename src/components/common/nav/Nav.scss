@@ -1,0 +1,38 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f5f2; /* Light beige background */
+  padding: 1rem 1.5rem;
+  font-family: 'Serif', serif;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar__menu-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.navbar__logo {
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-transform: capitalize;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar__actions-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
