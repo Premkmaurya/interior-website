@@ -27,11 +27,13 @@
         bottom: 10%;
         right: 3%;
         button {
+          font-family: var(--font-family);
+          text-transform: capitalize;
           background: none;
           border: 1px solid var(--color-primary);
           padding: var(--padding-md) var(--padding-sm);
           font-size: var(--font-size);
-          font-weight: bold;
+          font-weight: 400;
           color: #fff;
           cursor: pointer;
           border-radius: var(--border-radius-lg);

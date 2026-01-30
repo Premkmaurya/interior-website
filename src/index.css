@@ -21,6 +21,7 @@
 :root {
   --font-family: "allore", sans-serif;
   --font-family-alt: "esquie", serif;
+  --font-family-roboto: "roboto", sans-serif;
   --font-size: 1rem;
   --color-primary: #333;
   --color-secondary: #666;
