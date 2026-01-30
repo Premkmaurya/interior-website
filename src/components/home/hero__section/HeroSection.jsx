@@ -21,14 +21,14 @@ const HeroSection = () => {
             View More <RiArrowRightLine />
           </button>
         </div>
-        <div className="hero__circular-text">
+        {/* <div className="hero__circular-text">
           <CircularText
             text="MORDEN*MINIMILISTIC*MORDEN*"
             onHover="speedUp"
             spinDuration={20}
             className="custom-class"
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );
