@@ -1,11 +1,26 @@
-*{
+@font-face {
+  font-family: "allore";
+  src:
+    url("/font/allore.woff2") format("woff2"),
+    url("/font/allore.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "esquie";
+  src:
+    url("/font/cechila.woff") format("woff");
+  font-display: swap;
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-:root{
-  --font-family: 'Arial', sans-serif;
+:root {
+  --font-family: "allore", sans-serif;
+  --font-family-alt: "esquie", serif;
   --font-size: 1rem;
   --color-primary: #333;
   --color-secondary: #666;

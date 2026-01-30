@@ -49,16 +49,20 @@
 
       .hero__box-text {
         font-size: 1rem;
+        font-family: roboto;
         color: #1a1715;
         text-align: left;
+        line-height: 1.3;
+        word-spacing: 0.1rem;
       }
 
       .hero__box-button {
         display: inline-flex;
+        font-family: var(--font-family);
         align-items: center;
         padding: 0.8rem 1.5rem;
-        font-size: 1rem;
-        font-weight: bold;
+        font-size: 0.9rem;
+        font-weight: 500;
         color: #fff;
         background-color: #000;
         border: none;

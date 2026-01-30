@@ -1,104 +1,63 @@
-// :root variables presumed available
-// --color-bg, --color-text-main, --font-sans, etc.
-
-.features-section {
-  padding: 4rem 2rem;
-  background-color: var(--color-bg);
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+.project__section-container {
+  width: 100%;
+  columns: 4 150px;
+  column-gap: 10px;
+  padding: var(--padding-md) var(--padding-lg);
+  img {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius-md);
   }
+}
 
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); // 2 columns by default
-    gap: 2rem;
+.explore-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-md) var(--padding-lg);
+  background-color: #fff;
+  font-family: var(--font-family);
+  width: 100%;
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr; // 1 column on mobile
+  .explore-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
     }
 
-    .feature-card {
-      background-color: #fff;
-      border: 1px solid #e0e0e0;
-      border-radius: 20px; // Rounded corners
-      overflow: hidden;
+    .para {
       display: flex;
-      flex-direction: column; // Stack image and text vertically
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      gap: 1rem;
+      max-width: 400px;
 
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      p {
+        font-size: 1rem;
+        color: #666;
+        text-align: right;
+        margin-bottom: 1rem;
       }
 
-      // === Layout Type 1: Large Image (Text beside on desktop? Or below?) ===
-      // Based on your sketch, it looks like:
-      // Card 1: Description Left, Image Right (Big)
-      // Card 2: Description Top, Image Bottom (Small/Wide)
-      // Let's adapt to a flexible flexbox layout inside the card.
+      .view-more-button {
+        background-color: black;
+        color: white;
+        border: none;
+        width: 13vw;
+        padding: 0.8rem 1rem;
+        border-radius: var(--border-radius-lg);
+        cursor: pointer;
+        font-size: 1rem;
 
-      display: flex;
-      
-      // Default Mobile: Stack vertically
-      flex-direction: column; 
-
-      // === Specific Layout Adjustments ===
-      
-      &.large-image {
-        // Example: Image takes up more height or is on the side
-        // Let's make it side-by-side on desktop for variety
-        @media (min-width: 769px) {
-          flex-direction: row; 
-          align-items: center;
-          
-          .image-wrapper {
-            flex: 1;
-            height: 100%; 
-            order: 2; // Image on right
-          }
-          .content-wrapper {
-            flex: 1;
-            padding: 2rem;
-            order: 1; // Text on left
-          }
-        }
-      }
-
-      &.small-image {
-        // Example: Text top, Image bottom
-        .content-wrapper {
-          padding: 2rem;
-          text-align: center;
-        }
-        .image-wrapper {
-          height: 250px; // Fixed height for "smaller" look
-          width: 100%;
-        }
-      }
-
-      // === Common Styles ===
-      .image-wrapper {
-        overflow: hidden;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-      }
-
-      &:hover .image-wrapper img {
-        transform: scale(1.05);
-      }
-
-      .content-wrapper {
-        p {
-          font-family: var(--font-sans);
-          font-size: 1rem;
-          line-height: 1.6;
-          color: var(--color-text-main);
+        &:hover {
+          background-color: #333;
         }
       }
     }

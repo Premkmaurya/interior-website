@@ -11,6 +11,7 @@ const Home = () => {
     <div className='container'>
       <HeroSection />
       <AboutSection />
+      <ProductSection />
     </div>
   )
 }
