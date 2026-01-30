@@ -1,5 +1,5 @@
 .footer {
-    margin-top: 14vh;
+  margin-top: 14vh;
   background-color: #f9f7f2;
   color: var(--color-primary);
   font-family: var(--font-family);
@@ -92,7 +92,7 @@
           transition: color 0.3s;
 
           &::after {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -2px;
@@ -118,17 +118,17 @@
     text-align: center;
     font-size: 0.9rem;
     color: var(--color-secondary);
-    div{
-        width: 100%;
-        height: 10vh;
-        h1{
-            color: var(--color-primary);
-            font-size: 8rem;
-            text-transform: capitalize;
-            line-height: 1;
-            margin-top: 0.5rem;
-            font-weight: 500;
-        }
+    div {
+      width: 100%;
+      height: 10vh;
+      h1 {
+        color: var(--color-primary);
+        font-size: 8rem;
+        text-transform: capitalize;
+        line-height: 1;
+        margin-top: 0.5rem;
+        font-weight: 500;
+      }
     }
   }
 }

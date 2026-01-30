@@ -18,7 +18,7 @@ const HeroSection = () => {
             room, redefining the essence of chic living.
           </p>
           <button className="hero__box-button">
-            View More <RiArrowRightLine />
+            <span>View More</span> <RiArrowRightLine />
           </button>
         </div>
         {/* <div className="hero__circular-text">
