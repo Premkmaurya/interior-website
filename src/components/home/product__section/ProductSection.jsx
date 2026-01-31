@@ -6,36 +6,28 @@ const ProductSection = () => {
   const features = [
     {
       id: 1,
-      image: "/products/image-1.jpeg",
+      title: "Why is the moisture ratio important?",
+      description:
+        "To minimize changes in the wood, the moisture content should be in balance with the ambient humidity. In Scandinavian homes, the moisture ratio is approximately eight percent. Most of our wooden panels and wooden floors come with that moisture ratio, which guarantees a stable product that will neither shrink nor swell noticeably after assembly, provided they are not exposed to high humidity.",
     },
     {
       id: 2,
-      image: "/products/image-2.jpeg",
+      title: "Why is the moisture ratio important?",
+      description:
+        "To minimize changes in the wood, the moisture content should be in balance with the ambient humidity. In Scandinavian homes, the moisture ratio is approximately eight percent. Most of our wooden panels and wooden floors come with that moisture ratio, which guarantees a stable product that will neither shrink nor swell noticeably after assembly, provided they are not exposed to high humidity.",
     },
     {
       id: 3,
-      image: "/products/image-3.jpeg",
+      title: "Why is the moisture ratio important?",
+      description:
+        "To minimize changes in the wood, the moisture content should be in balance with the ambient humidity. In Scandinavian homes, the moisture ratio is approximately eight percent. Most of our wooden panels and wooden floors come with that moisture ratio, which guarantees a stable product that will neither shrink nor swell noticeably after assembly, provided they are not exposed to high humidity.",
     },
     {
       id: 4,
-      image: "/products/image-4.jpeg",
-    },
-    {
-      id: 5,
-      image: "/products/image-5.jpeg",
-    },
-    {
-      id: 6,
-      image: "/products/image-6.jpeg",
-    },
-    {
-      id: 7,
-      image: "/products/image-7.jpeg",
-    },
-    {
-      id: 8,
-      image: "/products/image-8.jpeg",
-    },
+      title: "Why is the moisture ratio important?",
+      description:
+        "To minimize changes in the wood, the moisture content should be in balance with the ambient humidity. In Scandinavian homes, the moisture ratio is approximately eight percent. Most of our wooden panels and wooden floors come with that moisture ratio, which guarantees a stable product that will neither shrink nor swell noticeably after assembly, provided they are not exposed to high humidity.",
+    }
   ];
 
   return (
@@ -73,16 +65,27 @@ const ProductSection = () => {
       </div>
 
       {/* Existing project section */}
-      <div className="project__section-container">
+      <section className="custom-request-section">
         {features.map((feature) => (
-          <img
-            width="100px"
-            src={feature.image}
-            alt={`Feature ${feature.id}`}
-            className="feature-image"
-          />
+          <div key={feature.id} className={`content-side-wrapper ${feature.id % 2 === 0 ? 'reverse' : ''}`}>
+            <div className="content-side">
+              <div className="text-container">
+                <span className="overline">PRICE REQUEST</span>
+                <h2 className="heading">
+                  Do you want to order a custom cake for your special event?{" "}
+                  <br />
+                  Now you can send a price request directly to our bakers.
+                </h2>
+              </div>
+            </div>
+
+            <div className="image-side">
+              {/* Replace with your actual bakery image */}
+              <img src="/img/image.jpg" alt="Bakery Interior" />
+            </div>
+          </div>
         ))}
-      </div>
+      </section>
     </>
   );
 };
