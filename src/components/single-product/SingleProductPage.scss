@@ -1,0 +1,223 @@
+// Colors [cite: 16, 17, 18]
+$bg-ivory: #fdfcf9;
+$text-black: #000000;
+$muted-beige: #f4f1ea;
+$white: #ffffff;
+$transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+.pdp-wrapper {
+  background-color: $bg-ivory;
+  min-height: 100vh;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .product-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr; // Desktop Layout [cite: 29]
+    gap: 80px;
+    max-width: 1200px;
+    width: 100%;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; // Mobile Stacking [cite: 32]
+    }
+    .image-container {
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .category-label {
+        font-size: 12px;
+        letter-spacing: 2px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: lighten($text-black, 40%);
+      }
+
+      .product-title {
+        font-family: var(--font-family-alt);
+        font-size: 48px;
+        font-weight: 700;
+        text-transform: uppercase; // [cite: 24]
+        margin: 0 0 20px 0;
+      }
+
+      .product-description {
+        font-family: var(--font-family);
+        font-size: 16px;
+        line-height: 1.6;
+        color: lighten($text-black, 20%);
+        margin-bottom: 30px;
+        max-width: 400px;
+      }
+
+      .product-meta {
+        margin-bottom: 40px;
+        .price {
+          font-size: 24px;
+          font-weight: 600;
+          margin-right: 20px;
+        }
+        .sku {
+          font-size: 12px;
+          color: #888;
+        }
+      }
+
+      .cta-group {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+
+        button {
+          padding: 16px 32px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.3s ease; // [cite: 68]
+        }
+
+        .btn-primary {
+          background: $text-black;
+          color: $white;
+          border: 1px solid $text-black;
+          flex: 2;
+          &:hover {
+            background: lighten($text-black, 20%);
+          }
+        }
+
+        .btn-secondary {
+          background: transparent;
+          border: 1px solid #ccc;
+          flex: 1;
+          &:hover {
+            background: $muted-beige;
+          }
+        }
+      }
+      .documentation {
+        .doc-link {
+          font-size: 13px;
+          text-decoration: none;
+          color: $text-black;
+          border-bottom: 1px solid #ccc;
+          padding-bottom: 2px;
+          &:hover {
+            border-color: $text-black;
+          }
+        }
+      }
+    }
+  }
+
+  .suggested-section {
+    background-color: $bg-ivory;
+    padding: 100px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+
+      .section-title {
+        font-family: var(--font-family-alt);
+        font-size: 32px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+
+      .section-subtitle {
+        font-family: var(--font-family-alt);
+        color: lighten($text-black, 40%);
+        font-size: 14px;
+      }
+    }
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); // 4-column grid for desktop
+    gap: 24px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .category-card {
+    cursor: pointer;
+    group-hover: scale(1.02);
+
+    .image-wrapper {
+      position: relative;
+      aspect-ratio: 4 / 5; // Portrait orientation for luxury feel
+      overflow: hidden;
+      margin-bottom: 15px;
+      background-color: #eee;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform $transition-smooth;
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.1); // Subtle darkening
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+
+        .view-label {
+          color: white;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          border-bottom: 1px solid white;
+          padding-bottom: 4px;
+        }
+      }
+    }
+
+    .category-name {
+      font-family: var(--font-family-alt);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: left;
+    }
+
+    // Hover Interactions
+    &:hover {
+      .image-wrapper img {
+        transform: scale(1.05); // Minimal motion as per design notes
+      }
+      .overlay {
+        opacity: 1;
+      }
+    }
+  }
+}
