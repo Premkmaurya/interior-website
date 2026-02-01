@@ -1,0 +1,66 @@
+// _variables.scss
+$color-bg: #f2f4f1; // Soft Sage / Muted Green [cite: 9]
+$color-text: #2d2926; // Charcoal / Dark Brown [cite: 12]
+$color-accent: #d7ccc8; // Warm Beige [cite: 10]
+
+$spacing-xl: 120px;
+$spacing-lg: 80px;
+
+.about-container {
+  background-color: $color-bg;
+  color: $color-text;
+  font-family: var(--font-family);
+  line-height: 1.6;
+
+  section {
+    padding: var(--padding-lg); // Generous whitespace [cite: 25]
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+  }
+  .hero-section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase; // Micro-headings [cite: 17, 36]
+    margin-bottom: 1rem;
+  }
+
+  .editorial-heading {
+    font-family:var(--font-family-alt);
+    line-height: 1;
+    font-size: clamp(2.5rem, 8vw, 5rem); // Responsive size [cite: 78]
+    font-weight: 400;
+  }
+
+  .hero-image-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 1.5s ease; // Slow reveal feel [cite: 65, 68]
+    }
+  }
+
+  .content-block {
+    max-width: 600px; // Single-column focus [cite: 21]
+
+    h2 {
+      font-family: var(--font-family-alt);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+  .heritage-text{
+    padding: var(--padding-lg) 0;
+  }
+}
