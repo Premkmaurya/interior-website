@@ -1,0 +1,145 @@
+// Brand Variables [cite: 110, 111, 116, 117]
+$bg-ivory: #fdfcf9;
+$text-black: #000000;
+$text-gray: #555555;
+$divider-beige: #e5e0d5;
+
+.contact-wrapper {
+  background-color: $bg-ivory;
+  color: $text-black;
+  .contact-hero {
+    height: 60vh;
+    text-align: center;
+    color: whitesmoke;
+    border-bottom: 1px solid $divider-beige; // [cite: 112]
+    background-image: url("/products/image-4.jpeg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: var(--padding-md) var(--padding-lg);
+
+    .page-title {
+      width: 100%;
+      font-family: var(--font-family);
+      font-size: 4.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      gap: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span:nth-child(2) {
+        height: 4rem;
+        padding-block: 2rem;
+      }
+    }
+
+    .subtitle {
+      font-family: var(--font-family-alt);
+      font-size: 18px;
+      color: rgb(221, 218, 218);
+    }
+  }
+
+  .channels-section {
+    padding: 80px 0;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); // [cite: 138, 182]
+      gap: 60px;
+      align-self: center;
+      padding: 0 var(--padding-lg);
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .channel-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .dept-name {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+      }
+
+      .contact-link {
+        font-family: var(--font-family-roboto);
+        font-size: 16px;
+        color: $text-gray;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $text-black;
+        }
+      }
+    }
+  }
+
+  .flagship-story {
+    display: flex; // [cite: 145]
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 0;
+    border-top: 1px solid $divider-beige;
+    width: 100%;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .story-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      .story-title {
+        font-family: var(--font-family);
+        font-size: 40px;
+        margin-bottom: 24px;
+      }
+
+      .story-text {
+        font-family: var(--font-family-alt);
+        line-height: 1.8; // [cite: 118]
+        color: $text-gray;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      .btn-tour {
+        background: $text-black;
+        color: white;
+        padding: 18px 40px;
+        border: none;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 1px;
+      }
+    }
+
+    .story-image {
+      width: 50%;
+      flex: 1.2;
+      img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+      }
+    }
+  }
+}

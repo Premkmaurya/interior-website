@@ -1,0 +1,85 @@
+// Variables based on Design Documents
+$bg-ivory: #fdfcf9; // [cite: 16, 110]
+$text-black: #000000; // [cite: 17, 111]
+$divider-beige: #e5e0d5; // [cite: 18, 112]
+$font-serif: "Playfair Display", serif; // [cite: 22, 116]
+
+.terms-wrapper {
+  background-color: $bg-ivory;
+  color: $text-black;
+  padding: 60px 80px;
+  min-height: 100vh;
+
+  @media (max-width: 768px) {
+    padding: 40px 20px;
+  }
+  .terms-header {
+    border-bottom: 1px solid $divider-beige;
+    padding-bottom: 40px;
+    margin-bottom: 60px;
+
+    .legal-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 40px;
+
+      a {
+        text-decoration: none;
+        color: lighten($text-black, 40%);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        transition: color 0.3s ease;
+
+        &.active {
+          color: $text-black;
+        }
+        &:hover {
+          color: $text-black;
+        }
+      }
+    }
+
+    .legal-title {
+      font-family: $font-serif;
+      font-size: 180px; //
+      line-height: 0.8;
+      margin: 0;
+      letter-spacing: -5px;
+
+      @media (max-width: 1024px) {
+        font-size: 100px;
+      }
+    }
+  }
+
+  .terms-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; // [cite: 29, 84]
+    gap: 100px;
+    max-width: 1400px;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .policy-block {
+      margin-bottom: 40px;
+
+      h3 {
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 1.8; // [cite: 118]
+        color: lighten($text-black, 20%);
+      }
+    }
+  }
+}

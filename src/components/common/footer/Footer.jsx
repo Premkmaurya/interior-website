@@ -13,7 +13,7 @@ const Footer = () => {
               <Link to="/register">Register Your Floor</Link>
             </li>
             <li>
-              <Link to="/information">Information</Link>
+              <Link to="/contact">Information</Link>
             </li>
           </ul>
         </div>
@@ -38,25 +38,13 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footer__section">
-          <h4>Company</h4>
+          <h4>Explore</h4>
           <ul>
             <li>
-              <Link to="/designer-collective">Designer Collective</Link>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="/collab">Collab</Link>
-            </li>
-            <li>
-              <Link to="/dugood">Dugood</Link>
-            </li>
-            <li>
-              <Link to="/inspiration">Inspiration</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact Information</Link>
-            </li>
-            <li>
-              <Link to="/showroom">Visit Our Showroom</Link>
+              <Link to="/projects">Projects</Link>
             </li>
           </ul>
         </div>
@@ -65,9 +53,6 @@ const Footer = () => {
           <ul>
             <li>
               <Link to="/terms-of-use">Terms of Use</Link>
-            </li>
-            <li>
-              <Link to="/sales-policy">Sales Policy</Link>
             </li>
             <li>
               <Link to="/terms-and-conditions">Terms and Conditions</Link>

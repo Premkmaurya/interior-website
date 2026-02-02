@@ -1,0 +1,85 @@
+// Variables from Brand Design Guidelines
+$bg-ivory: #fdfcf9; // [cite: 110]
+$text-black: #000000; // [cite: 111]
+$text-gray: #555555;
+$border-light: #e5e0d5; // [cite: 112]
+
+.legal-container {
+  background-color: $bg-ivory;
+  color: $text-black;
+  padding: 80px 60px 0;
+  min-height: 100vh;
+  font-family: var(--font-family);
+
+  @media (max-width: 768px) {
+    padding: 40px 20px;
+  }
+}
+
+.legal-header {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid $border-light; // [cite: 129]
+  padding-bottom: 60px;
+  margin-bottom: 80px;
+
+  .legal-sidebar {
+    width: 250px;
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      a {
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 700;
+        color: lighten($text-black, 60%);
+        letter-spacing: 1px;
+        transition: color 0.3s;
+
+        &.active,
+        &:hover {
+          color: $text-black;
+        }
+      }
+    }
+  }
+
+  .main-title {
+    font-family: var(--font-family);
+    font-size: 180px; // Oversized title [cite: 116]
+    line-height: 0.8;
+    margin: 0;
+    flex: 1;
+    letter-spacing: -5px;
+
+    @media (max-width: 1024px) {
+      font-size: 100px;
+    }
+  }
+}
+
+.legal-content {
+  max-width: 800px;
+  margin: 0 auto 150px; // Generous vertical whitespace [cite: 128]
+
+  .legal-section {
+    margin-bottom: 60px;
+
+    h2 {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 15px;
+      font-weight: 200;
+      line-height: 1.8; // Generous line-height [cite: 118]
+      color: lighten($text-black, 15%);
+    }
+  }
+}
+
