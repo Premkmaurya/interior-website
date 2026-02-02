@@ -16,6 +16,7 @@ const AppRoute = () => {
       <Route path="/about" element={<About />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/single-product" element={<SingleProduct />} />
+      <Route path="/single-product/:id" element={<SingleProduct />} />
       <Route path="/terms-of-use" element={<Term />} />
       <Route path="/terms-and-conditions" element={<TandC />} />
       <Route path="/contact" element={<Contact />} />

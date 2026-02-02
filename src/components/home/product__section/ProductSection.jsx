@@ -1,7 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 import "./ProductSection.scss";
 
 const ProductSection = () => {
+  const navigate = useNavigate();
+  useScrollToTop();
+
   // Data for the feature cards
   const features = [
     {
@@ -30,6 +35,10 @@ const ProductSection = () => {
     }
   ];
 
+  const handleViewMore = () => {
+    navigate("/projects");
+  };
+
   return (
     <>
       <div className="explore-section">
@@ -38,7 +47,7 @@ const ProductSection = () => {
             Explore Our <br /> Proudly Collection
           </h2>
           <div className="para">
-            <button className="view-more-button">
+            <button className="view-more-button" onClick={handleViewMore}>
               <span className="text">View More</span>
               <span className="svg">
                 <svg

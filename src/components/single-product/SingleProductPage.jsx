@@ -1,4 +1,6 @@
 import React from "react";
+import { useParams, useLocation } from "react-router-dom";
+import useScrollToTop from "../../hooks/useScrollToTop";
 import "./SingleProductPage.scss";
 
 const categories = [
@@ -29,29 +31,46 @@ const categories = [
 ];
 
 const SingleProductPage = () => {
+  const { id } = useParams();
+  const location = useLocation();
+  const product = location.state?.product;
+
+  useScrollToTop();
+
+  // Default product data if no product is passed
+  const displayProduct = product || {
+    name: "NORDIC OAK CHAIR",
+    image:
+      "https://images.unsplash.com/photo-1581539250439-c96689b516dd?auto=format&fit=crop&q=80&w=1000",
+    description:
+      "Hand-finished with natural oils to preserve the organic grain and texture of sustainable European oak.",
+    price: 850.0,
+    sku: "4087-FC",
+    category: "CARE PRODUCTS",
+  };
+
   return (
     <div className="pdp-wrapper">
       <main className="product-hero">
         {/* Left: Product Image [cite: 30] */}
         <div className="image-container">
           <img
-            src="https://images.unsplash.com/photo-1581539250439-c96689b516dd?auto=format&fit=crop&q=80&w=1000"
-            alt="Premium Furniture"
+            src={displayProduct.image}
+            alt={displayProduct.name}
           />
         </div>
 
         {/* Right: Product Information [cite: 31] */}
         <section className="product-info">
-          <span className="category-label">CARE PRODUCTS</span>
-          <h1 className="product-title">NORDIC OAK CHAIR</h1>
+          <span className="category-label">{displayProduct.category || "CARE PRODUCTS"}</span>
+          <h1 className="product-title">{displayProduct.name}</h1>
           <p className="product-description">
-            Hand-finished with natural oils to preserve the organic grain and
-            texture of sustainable European oak.
+            {displayProduct.description}
           </p>
 
           <div className="product-meta">
-            <span className="price">$850.00</span>
-            <span className="sku">SKU: 4087-FC</span>
+            <span className="price">${displayProduct.price?.toFixed(2) || "$850.00"}</span>
+            <span className="sku">SKU: {displayProduct.sku || "4087-FC"}</span>
           </div>
 
           <div className="cta-group">

@@ -1,17 +1,24 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useScrollToTop from "../../hooks/useScrollToTop";
 import "./ProductPage.scss";
 
-import {
-  RiTruckLine,
-  RiLoopLeftLine,
-  RiCloseLargeFill,
-  RiAddLargeLine,
-} from "@remixicon/react";
+import { RiTruckLine, RiLoopLeftLine, RiAddLargeLine } from "@remixicon/react";
 import { LuPackageOpen } from "react-icons/lu";
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+
+  const handleViewProduct = () => {
+    navigate(`/single-product/${product.id}`, { state: { product } });
+  };
+
   return (
-    <div className="product-card">
+    <div
+      className="product-card"
+      onClick={handleViewProduct}
+      style={{ cursor: "pointer" }}
+    >
       <div className="image-container">
         <img src={product.image} alt={product.name} />
       </div>
@@ -22,7 +29,7 @@ const ProductCard = ({ product }) => {
           <p className="product-price">${product.price.toFixed(2)}</p>
         </div>
         {/* Quick Add Shopping Bag Icon [cite: 144] */}
-        <button className="bag-button">
+        <button className="bag-button" onClick={(e) => e.stopPropagation()}>
           <svg
             width="20"
             height="20"
@@ -42,29 +49,37 @@ const ProductCard = ({ product }) => {
 };
 
 const ProductPage = () => {
+  useScrollToTop();
+
   const products = [
     {
       id: 1,
       name: "Oak Wood Chair",
       price: 129.99,
+      description:
+        "A beautifully crafted oak wood chair that combines comfort and style.",
       image: "/products/image-1.jpeg",
     },
     {
       id: 2,
       name: "Scandinavian Sofa",
       price: 499.99,
+      description:
+        "A sleek Scandinavian sofa that blends modern design with comfort.",
       image: "/products/image-2.jpeg",
     },
     {
       id: 3,
       name: "Minimalist Coffee Table",
       price: 199.99,
+      description: "A minimalist coffee table made from sustainable materials.",
       image: "/products/image-3.jpeg",
     },
     {
       id: 4,
       name: "Modern Bookshelf",
       price: 299.99,
+      description: "A modern bookshelf that adds elegance to any living space.",
       image: "/products/image-4.jpeg",
     },
     // Add more products as needed
