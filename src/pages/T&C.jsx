@@ -1,5 +1,5 @@
 import React from 'react'
-import TermsPage from './t&c/TermsPage'
+import TermsPage from '../components/t&c/TermsPage'
 
 const TandC = () => {
   return (

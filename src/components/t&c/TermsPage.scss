@@ -34,7 +34,7 @@ $border-light: #e5e0d5; // [cite: 112]
         text-decoration: none;
         font-size: 11px;
         font-weight: 700;
-        color: lighten($text-black, 60%);
+        color: $text-black;
         letter-spacing: 1px;
         transition: color 0.3s;
 
@@ -78,7 +78,7 @@ $border-light: #e5e0d5; // [cite: 112]
       font-size: 15px;
       font-weight: 200;
       line-height: 1.8; // Generous line-height [cite: 118]
-      color: lighten($text-black, 15%);
+      color: $text-black;
     }
   }
 }

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./AboutSection.scss";
 
 import { RiArrowLeftUpLine } from "@remixicon/react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 
 const styleMap = {
   svg: {
@@ -45,18 +49,82 @@ const SVGStar = ({ className }) => (
       <defs></defs>
       <g id="Layer_x0020_1">
         <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-        <path
-          className="fil0"
-          d={styleMap.svg.path.d}
-        ></path>
+        <path className="fil0" d={styleMap.svg.path.d}></path>
       </g>
     </svg>
   </div>
 );
 
 const AboutSection = () => {
+  const container = useRef(null);
+
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(SplitText);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 75%",
+          end: "bottom 60%",
+          toggleActions: "play none none reverse",
+          markers: true,
+        },
+        defaults:{
+          duration:0.5,
+          ease:"power2.out",
+        }
+      });
+
+      
+      tl.from(".about__image_left_wrapper", {
+        scale: 0.7,
+        opacity: 0,
+        ease: "back.out(1.7)",
+      })
+        .from(
+          ".about__text_right_content",
+          {
+            scale: 0.7,
+            opacity: 0,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        )
+        .from(
+          ".about__text_right_bottom",
+          {
+            scale: 0.7,
+            opacity: 0,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        )
+        .from(".about__image_overlay_text span", {
+          y: 50,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.out",
+          stagger: 0.2,
+        })
+        .from(".highlighted_text", {
+          scale: 0.7,
+          opacity: 0,
+          ease: "back.out(1.7)",
+        })
+        .from(".aesthetic__button",{
+          opacity:0,
+          ease:"back.out(1.7)",
+        })
+        
+    },
+    { scope: container },
+  );
+
   return (
-    <div className="about__section">
+    <div ref={container} className="about__section">
       <div className="about__image_left_wrapper">
         <img src="/img/image-2.jpg" alt="" />
         <div className="about__image_overlay">
@@ -75,7 +143,7 @@ const AboutSection = () => {
       </div>
       <div className="about__text_right_wrapper">
         <div className="about__text_right_content">
-          <button>
+          <button className="aesthetic__button">
             Aesthetic
             {styleMap.stars.map((star) => (
               <SVGStar key={star.name} className={star.className} />
@@ -83,8 +151,7 @@ const AboutSection = () => {
           </button>
 
           <div className="about__text_right_heading">
-            Aesthetic furtniture where every
-            place tells a sotry of style
+            Aesthetic furtniture where every place tells a sotry of style
           </div>
           <div className="about__text_right_paragraph">
             Into a gallary <br /> of elegance
