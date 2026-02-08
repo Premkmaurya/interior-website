@@ -69,35 +69,26 @@ const AboutSection = () => {
           trigger: container.current,
           start: "top 75%",
           end: "bottom 60%",
-          toggleActions: "play none none reverse",
-          markers: true,
+          toggleActions: "play none none reverse"
         },
-        defaults:{
-          duration:0.5,
-          ease:"power2.out",
-        }
+        defaults: {
+          duration: 0.5,
+          ease: "power2.out",
+        },
       });
 
-      
       tl.from(".about__image_left_wrapper", {
         scale: 0.7,
         opacity: 0,
         ease: "back.out(1.7)",
       })
         .from(
-          ".about__text_right_content",
+          ".about__text_right_wrapper",
           {
             scale: 0.7,
             opacity: 0,
-            ease: "power2.out",
-          },
-          "-=0.4",
-        )
-        .from(
-          ".about__text_right_bottom",
-          {
-            scale: 0.7,
-            opacity: 0,
+            duration:0.8,
+            stagger: 0.2,
             ease: "power2.out",
           },
           "-=0.4",
@@ -114,11 +105,6 @@ const AboutSection = () => {
           opacity: 0,
           ease: "back.out(1.7)",
         })
-        .from(".aesthetic__button",{
-          opacity:0,
-          ease:"back.out(1.7)",
-        })
-        
     },
     { scope: container },
   );

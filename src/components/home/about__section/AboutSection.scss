@@ -9,10 +9,12 @@
 
   .about__image_left_wrapper {
     width: 75%;
+    height: 74vh;
     position: relative;
     img {
       width: 100%;
-      aspect-ratio: 3/2;
+      height: 100%;
+      object-fit: cover;
       display: block;
       border-radius: var(--border-radius-lg);
     }
