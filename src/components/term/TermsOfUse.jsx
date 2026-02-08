@@ -1,7 +1,9 @@
 import React from 'react';
 import './TermsOfUse.scss';
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 const TermsOfUse = () => {
+  useScrollToTop()
   return (
     <div className="terms-wrapper">
       <header className="terms-header">

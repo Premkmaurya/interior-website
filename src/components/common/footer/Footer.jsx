@@ -26,15 +26,6 @@ const Footer = () => {
             <li>
               <Link to="/facebook">Facebook</Link>
             </li>
-            <li>
-              <Link to="/linkedin">LinkedIn</Link>
-            </li>
-            <li>
-              <Link to="/pinterest">Pinterest</Link>
-            </li>
-            <li>
-              <Link to="/vimeo">Vimeo</Link>
-            </li>
           </ul>
         </div>
         <div className="footer__section">

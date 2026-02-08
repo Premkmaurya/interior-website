@@ -1,7 +1,9 @@
 import React from 'react';
 import './AboutSection.scss';
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 const AboutSection = () => {
+  useScrollToTop()
   return (
     <div className="about-container">
       {/* 4.1 Hero Section [cite: 34] */}

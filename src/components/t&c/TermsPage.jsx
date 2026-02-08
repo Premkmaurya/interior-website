@@ -1,7 +1,9 @@
 import React from 'react';
 import './TermsPage.scss';
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 const TermsPage = () => {
+  useScrollToTop()
   return (
     <div className="legal-container">
       <header className="legal-header">
