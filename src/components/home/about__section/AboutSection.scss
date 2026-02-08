@@ -289,10 +289,45 @@
         align-items: center;
         cursor: pointer;
         border: 10px solid whitesmoke;
-        svg {
-          width: 20px;
-          height: 20px;
-          color: whitesmoke;
+        padding: var(--padding-md);
+        overflow: hidden;
+
+        .arrow {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+
+          svg {
+            width: 20px;
+            height: 20px;
+            color: whitesmoke;
+            transition: all 0.5s ease-in-out;
+          }
+        }
+
+        .arrow-primary {
+          opacity: 1;
+          transform: translate(0, 0);
+          transition: all 0.5s ease-in-out;
+        }
+
+        .arrow-secondary {
+          opacity: 0;
+          transform: translate(30px, 30px);
+          transition: all 0.5s ease-in-out;
+        }
+      }
+      &:hover {
+        .link {
+          .arrow-primary {
+            opacity: 0;
+            transform: translate(-30px, -30px);
+          }
+          .arrow-secondary {
+            opacity: 1;
+            transform: translate(0, 0);
+          }
         }
       }
     }

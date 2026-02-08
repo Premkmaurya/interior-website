@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./AboutSection.scss";
 
-import { RiArrowLeftUpLine } from "@remixicon/react";
+import { RiArrowLeftUpLine, RiArrowRightDownLine } from "@remixicon/react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -146,7 +146,12 @@ const AboutSection = () => {
         <div className="about__text_right_bottom">
           <img src="/img/image-3.jpg" alt="About Section Bottom Image" />
           <div className="link">
-            <RiArrowLeftUpLine />
+            <span className="arrow arrow-primary">
+              <RiArrowLeftUpLine />
+            </span>
+            <span className="arrow arrow-secondary">
+              <RiArrowLeftUpLine />
+            </span>
           </div>
         </div>
       </div>
