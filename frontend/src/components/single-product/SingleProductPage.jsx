@@ -3,6 +3,14 @@ import { useParams, useLocation } from "react-router-dom";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import "./SingleProductPage.scss";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css/navigation";
+
+// import required modules
+import {Autoplay, Navigation } from "swiper/modules";
+
 const categories = [
   {
     id: 1,
@@ -54,22 +62,46 @@ const SingleProductPage = () => {
       <main className="product-hero">
         {/* Left: Product Image [cite: 30] */}
         <div className="image-container">
-          <img
-            src={displayProduct.image}
-            alt={displayProduct.name}
-          />
+          <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            scrollbar={{ draggable: true }}
+            navigation={true}
+            modules={[Autoplay, Navigation]}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <img src={displayProduct.image} alt={displayProduct.name} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={displayProduct.image} alt={displayProduct.name} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={displayProduct.image} alt={displayProduct.name} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={displayProduct.image} alt={displayProduct.name} />
+            </SwiperSlide>
+          </Swiper>
         </div>
 
         {/* Right: Product Information [cite: 31] */}
         <section className="product-info">
-          <span className="category-label">{displayProduct.category || "CARE PRODUCTS"}</span>
+          <span className="category-label">
+            {displayProduct.category || "CARE PRODUCTS"}
+          </span>
           <h1 className="product-title">{displayProduct.name}</h1>
-          <p className="product-description">
-            {displayProduct.description}
-          </p>
+          <p className="product-description">{displayProduct.description}</p>
 
           <div className="product-meta">
-            <span className="price">${displayProduct.price?.toFixed(2) || "$850.00"}</span>
+            <span className="price">
+              ${displayProduct.price?.toFixed(2) || "$850.00"}
+            </span>
             <span className="sku">SKU: {displayProduct.sku || "4087-FC"}</span>
           </div>
 
