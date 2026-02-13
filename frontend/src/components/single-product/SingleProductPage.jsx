@@ -3,13 +3,15 @@ import { useParams, useLocation } from "react-router-dom";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import "./SingleProductPage.scss";
 
+import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css/navigation";
 
 // import required modules
-import {Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 
 const categories = [
   {
@@ -71,7 +73,10 @@ const SingleProductPage = () => {
               disableOnInteraction: false,
             }}
             scrollbar={{ draggable: true }}
-            navigation={true}
+            navigation={{
+              nextEl: ".swiper-btn-next",
+              prevEl: ".swiper-btn-prev",
+            }}
             modules={[Autoplay, Navigation]}
             className="mySwiper"
           >
@@ -88,6 +93,12 @@ const SingleProductPage = () => {
               <img src={displayProduct.image} alt={displayProduct.name} />
             </SwiperSlide>
           </Swiper>
+          <div className="swiper-btn-next">
+            <RiArrowRightSLine />
+          </div>
+          <div className="swiper-btn-prev">
+            <RiArrowLeftSLine />
+          </div>
         </div>
 
         {/* Right: Product Information [cite: 31] */}
