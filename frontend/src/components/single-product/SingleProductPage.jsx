@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import "./SingleProductPage.scss";
 
-import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
+import { RiArrowLeftSLine, RiArrowRightSLine, RiCloseLine } from "@remixicon/react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -44,8 +44,21 @@ const SingleProductPage = () => {
   const { id } = useParams();
   const location = useLocation();
   const product = location.state?.product;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useScrollToTop();
+
+  // Track window resize to detect mobile/desktop
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Default product data if no product is passed
   const displayProduct = product || {
@@ -57,6 +70,16 @@ const SingleProductPage = () => {
     price: 850.0,
     sku: "4087-FC",
     category: "CARE PRODUCTS",
+  };
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
   };
 
   return (
@@ -81,16 +104,36 @@ const SingleProductPage = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <img src={displayProduct.image} alt={displayProduct.name} />
+              <img 
+                src={displayProduct.image} 
+                alt={displayProduct.name}
+                onClick={() => handleImageClick(displayProduct.image)}
+                className="swiper-image-clickable"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={displayProduct.image} alt={displayProduct.name} />
+              <img 
+                src={displayProduct.image} 
+                alt={displayProduct.name}
+                onClick={() => handleImageClick(displayProduct.image)}
+                className="swiper-image-clickable"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={displayProduct.image} alt={displayProduct.name} />
+              <img 
+                src={displayProduct.image} 
+                alt={displayProduct.name}
+                onClick={() => handleImageClick(displayProduct.image)}
+                className="swiper-image-clickable"
+              />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={displayProduct.image} alt={displayProduct.name} />
+              <img 
+                src={displayProduct.image} 
+                alt={displayProduct.name}
+                onClick={() => handleImageClick(displayProduct.image)}
+                className="swiper-image-clickable"
+              />
             </SwiperSlide>
           </Swiper>
           <div className="swiper-btn-next">
@@ -150,6 +193,21 @@ const SingleProductPage = () => {
           ))}
         </div>
       </section>
+      <div className="swiper-suggested-section">
+
+      </div>
+
+      {/* Image Modal */}
+      {isModalOpen && (
+        <div className="image-modal-overlay" onClick={closeModal}>
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={closeModal}>
+              <RiCloseLine />
+            </button>
+            <img src={selectedImage} alt="fullscreen" className="modal-image" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
