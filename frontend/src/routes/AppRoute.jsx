@@ -8,6 +8,7 @@ import Contact from "../pages/Contact.jsx";
 import SingleProduct from "../pages/SingleProduct.jsx";
 import Term from "../pages/Term.jsx";
 import TandC from "../pages/T&C.jsx";
+import Login from "../pages/Login.jsx";
 
 const AppRoute = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoute = () => {
       <Route path="/terms-of-use" element={<Term />} />
       <Route path="/terms-and-conditions" element={<TandC />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 };

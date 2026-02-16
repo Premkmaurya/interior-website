@@ -3,7 +3,11 @@ import { useParams, useLocation } from "react-router-dom";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import "./SingleProductPage.scss";
 
-import { RiArrowLeftSLine, RiArrowRightSLine, RiCloseLine } from "@remixicon/react";
+import {
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
+  RiCloseLine,
+} from "@remixicon/react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -104,32 +108,32 @@ const SingleProductPage = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <img 
-                src={displayProduct.image} 
+              <img
+                src={displayProduct.image}
                 alt={displayProduct.name}
                 onClick={() => handleImageClick(displayProduct.image)}
                 className="swiper-image-clickable"
               />
             </SwiperSlide>
             <SwiperSlide>
-              <img 
-                src={displayProduct.image} 
+              <img
+                src={displayProduct.image}
                 alt={displayProduct.name}
                 onClick={() => handleImageClick(displayProduct.image)}
                 className="swiper-image-clickable"
               />
             </SwiperSlide>
             <SwiperSlide>
-              <img 
-                src={displayProduct.image} 
+              <img
+                src={displayProduct.image}
                 alt={displayProduct.name}
                 onClick={() => handleImageClick(displayProduct.image)}
                 className="swiper-image-clickable"
               />
             </SwiperSlide>
             <SwiperSlide>
-              <img 
-                src={displayProduct.image} 
+              <img
+                src={displayProduct.image}
                 alt={displayProduct.name}
                 onClick={() => handleImageClick(displayProduct.image)}
                 className="swiper-image-clickable"
@@ -192,15 +196,54 @@ const SingleProductPage = () => {
             </div>
           ))}
         </div>
+        <div className="swiper-category">
+          <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            scrollbar={{ draggable: true }}
+            navigation={{
+              nextEl: ".swiper-btn-next",
+              prevEl: ".swiper-btn-prev",
+            }}
+            modules={[Autoplay, Navigation]}
+            className="mySwiper"
+          >
+              {categories.map((cat) => (
+                <SwiperSlide key={cat.id}>
+                  <div className="category-card">
+                    <div className="image-wrapper">
+                      <img src={cat.image} alt={cat.name} loading="lazy" />
+                      <div className="overlay">
+                        <span className="view-label">VIEW COLLECTION</span>
+                      </div>
+                    </div>
+                    <h3 className="category-name">{cat.name}</h3>
+                  </div>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+          <div className="swiper-btn-next">
+            <RiArrowRightSLine />
+          </div>
+          <div className="swiper-btn-prev">
+            <RiArrowLeftSLine />
+          </div>
+        </div>
       </section>
-      <div className="swiper-suggested-section">
 
-      </div>
 
       {/* Image Modal */}
       {isModalOpen && (
         <div className="image-modal-overlay" onClick={closeModal}>
-          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="image-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button className="modal-close-btn" onClick={closeModal}>
               <RiCloseLine />
             </button>
