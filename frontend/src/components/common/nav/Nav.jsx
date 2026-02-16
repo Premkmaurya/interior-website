@@ -61,7 +61,10 @@ const Nav = () => {
           >
             <RiUserLine />
           </span>
-          <span className="navbar__actions-icon">
+          <span
+            onClick={() => navigate("/cart")}
+            className="navbar__actions-icon"
+          >
             <RiShoppingCart2Line />
           </span>
         </div>

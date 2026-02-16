@@ -9,6 +9,8 @@ import SingleProduct from "../pages/SingleProduct.jsx";
 import Term from "../pages/Term.jsx";
 import TandC from "../pages/T&C.jsx";
 import Login from "../pages/Login.jsx";
+import Cart from "../pages/Cart.jsx";
+import Dashboard from "../pages/Dashboard.jsx";
 
 const AppRoute = () => {
   return (
@@ -22,6 +24,9 @@ const AppRoute = () => {
       <Route path="/terms-and-conditions" element={<TandC />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+
     </Routes>
   );
 };

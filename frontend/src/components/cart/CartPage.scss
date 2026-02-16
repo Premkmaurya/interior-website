@@ -1,0 +1,285 @@
+// Color Palette (Matching your Theme)
+$bg-color: #F9F8F3; // Warm beige background
+$card-bg: #FFFFFF; // White for cards
+$text-main: #2C2C2C; // Charcoal
+$text-light: #666666; // Muted grey
+$border-color: #E5E5E5; // Subtle borders
+
+.cart-page {
+    min-height: 100vh;
+    background-color: $bg-color;
+    padding: 4rem 2rem;
+    font-family: var(--font-family-roboto);
+    color: $text-main;
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    // --- Header ---
+    .cart-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding-bottom: 1rem;
+
+        h1 {
+            font-family: var(--font-family); // Editorial Serif
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .count {
+            font-family: var(--font-family-alt);
+            font-size: 1rem;
+            color: $text-light;
+        }
+    }
+
+    // --- Layout Grid ---
+    .cart-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr; // Wide list, narrower summary
+        gap: 4rem;
+
+        @media (max-width: 900px) {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
+
+    // --- Cart Items List ---
+    .cart-items {
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto; // Image | Info | Price
+            gap: 2rem;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid $border-color;
+            align-items: start;
+
+            @media (max-width: 600px) {
+                grid-template-columns: 80px 1fr;
+                gap: 1rem;
+                position: relative;
+            }
+
+            .item-image {
+                width: 100%;
+                aspect-ratio: 1;
+                background-color: #f0f0f0;
+                border-radius: 8px;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .item-details {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+
+                .product-name {
+                    font-family: var(--font-family); // Serif
+                    font-size: 1.25rem;
+                    margin-bottom: 0.5rem;
+                    font-weight: 400;
+                    color: $text-main;
+                }
+
+                .product-variant {
+                    font-family: var(--font-family-roboto);
+                    font-size: 0.9rem;
+                    color: $text-light;
+                    margin-bottom: 1rem;
+                }
+
+                .info-bottom {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                    margin-top: auto;
+
+                    .quantity-wrapper {
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid $border-color;
+                        border-radius: 4px;
+                        padding: 4px 8px;
+
+                        button {
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            color: $text-main;
+                            padding: 4px;
+
+                            &:hover {
+                                color: #000;
+                            }
+                        }
+
+                        span {
+                            padding: 0 12px;
+                            font-size: 0.9rem;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .remove-btn {
+                        background: none;
+                        border: none;
+                        text-decoration: underline;
+                        color: $text-light;
+                        font-size: 0.85rem;
+                        cursor: pointer;
+                        font-family: var(--font-family-alt);
+
+                        &:hover {
+                            color: #d32f2f; // Subtle red on hover
+                        }
+                    }
+                }
+            }
+
+            .item-price {
+                font-family: var(--font-family-roboto);
+                font-weight: 500;
+                font-size: 1.1rem;
+                text-align: right;
+
+                @media (max-width: 600px) {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    // --- Summary Card ---
+    .cart-summary {
+        .summary-card {
+            background-color: $card-bg;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); // Very subtle shadow
+            position: sticky;
+            top: 2rem;
+
+            h2 {
+                font-family: var(--font-family);
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+                font-weight: 400;
+            }
+
+            .summary-row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+                font-size: 0.95rem;
+                color: $text-light;
+
+                span:last-child {
+                    color: $text-main;
+                    font-weight: 500;
+                }
+
+                &.total {
+                    font-size: 1.2rem;
+                    color: $text-main;
+                    font-weight: 700;
+                    margin-bottom: 0.5rem;
+                }
+            }
+
+            .summary-divider {
+                height: 1px;
+                background-color: $border-color;
+                margin: 1.5rem 0;
+            }
+
+            .shipping-note {
+                font-size: 0.8rem;
+                color: $text-light;
+                margin-bottom: 1.5rem;
+                font-family: var(--font-family-alt);
+            }
+
+            .checkout-btn {
+                width: 100%;
+                background-color: $text-main;
+                color: #fff;
+                border: none;
+                padding: 1rem;
+                border-radius: 8px;
+                font-size: 1rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                transition: all 0.3s;
+                font-family: var(--font-family-alt);
+
+                &:hover {
+                    background-color: #000;
+                    transform: translateY(-2px);
+                }
+            }
+        }
+    }
+
+    // --- Empty State ---
+    &.empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 70vh;
+
+        .empty-content {
+            h1 {
+                font-family: var(--font-family);
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                font-size: 1.1rem;
+                color: $text-light;
+                margin-bottom: 2rem;
+            }
+
+            .btn-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                color: $text-main;
+                text-decoration: none;
+                font-weight: 600;
+                border-bottom: 1px solid $text-main;
+                padding-bottom: 4px;
+                transition: opacity 0.3s;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+}
