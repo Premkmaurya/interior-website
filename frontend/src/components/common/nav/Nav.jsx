@@ -4,13 +4,11 @@ import {
   RiMenu2Fill,
   RiShoppingCart2Line,
   RiUserLine,
-  RiLogoutBoxRLine,
 } from "@remixicon/react";
 import { useSelector, useDispatch } from "react-redux";
 import gsap from "gsap";
 import "./Nav.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../../../store/slices/authSlice";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -63,8 +61,7 @@ const Nav = () => {
           <span
             onClick={() => {
               if (isLoggedIn) {
-                dispatch(logout());
-                navigate("/");
+                navigate("/dashboard");
               } else {
                 navigate("/login");
               }
@@ -72,7 +69,7 @@ const Nav = () => {
             className="navbar__actions-icon"
             title={isLoggedIn ? "Logout" : "Login"}
           >
-            {isLoggedIn ? <RiLogoutBoxRLine /> : <RiUserLine />}
+            <RiUserLine />
           </span>
           <span
             onClick={() => navigate("/cart")}

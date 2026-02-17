@@ -1,22 +1,48 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-let user;
+export const checkAuth = createAsyncThunk("auth/checkAuth", async () => {
+  const res = await axios.get("http://localhost:3000/api/auth/me", {
+    withCredentials: true,
+  });
+  return res.data;
+});
 
-const initialState = {
-  isLoggedIn: async function checkAuth() {
-    await axios.get("http://localhost:3000/api/auth/me", { withCredentials: true })
-      .then((res) => {
-        if (res.status === 200) {
-          user = res.data.user;
-          return true;
-        } else {
-          return false;
-        }
+export const authSlice = createSlice({
+  name: "auth",
+  initialState: {
+    user: null,
+    isLoggedIn: false,
+    loading: true,
+  },
+  reducers: {
+    login: (state, action) => {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+    },
+    logout: (state) => {
+      state.user = null;
+      state.isLoggedIn = false;
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(checkAuth.pending, (state) => {
+        state.loading = true;
       })
-      .catch(() => {
-        return false;
+      .addCase(checkAuth.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggedIn = true;
+        state.loading = false;
+      })
+      .addCase(checkAuth.rejected, (state) => {
+        state.user = null;
+        state.isLoggedIn = false;
+        state.loading = false;
       });
   },
-  user: user || null,
-};
+});
 
+export const { login, logout } = authSlice.actions;
+export default authSlice.reducer;

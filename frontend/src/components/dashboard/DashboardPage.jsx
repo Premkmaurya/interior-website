@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   RiFileList3Line,
@@ -18,14 +18,14 @@ import "./DashboardPage.scss";
 const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState("requests");
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
   // --- MOCK DATA (In real app, fetch from API) ---
   const [userData] = useState({
-    firstName: "Oliver",
-    lastName: "Smith",
-    email: "oliver.smith@example.com",
-    phone: "+1 (555) 019-2834",
+    fullName: user?.fullName || "Oliver",
+    email: user?.email || "oliver.smith@example.com",
+    phone: user?.phone || "+1 (555) 019-2834",
   });
 
   const {
@@ -36,8 +36,7 @@ const DashboardPage = () => {
   } = useForm({
     mode: "onBlur",
     defaultValues: {
-      firstName: userData.firstName,
-      lastName: userData.lastName,
+      fullName: userData.fullName,
       email: userData.email,
       phone: userData.phone,
       newPassword: "",
@@ -220,38 +219,20 @@ const DashboardPage = () => {
               >
                 <div className="form-row">
                   <div className="form-group">
-                    <label>First Name</label>
+                    <label>Full Name</label>
                     <input
                       type="text"
-                      {...register("firstName", {
-                        required: "First name is required",
+                      {...register("fullName", {
+                        required: "Full name is required",
                         minLength: {
                           value: 2,
-                          message: "First name must be at least 2 characters",
+                          message: "Full name must be at least 2 characters",
                         },
                       })}
                     />
-                    {errors.firstName && (
+                    {errors.fullName && (
                       <span className="error-text">
-                        {errors.firstName.message}
-                      </span>
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label>Last Name</label>
-                    <input
-                      type="text"
-                      {...register("lastName", {
-                        required: "Last name is required",
-                        minLength: {
-                          value: 2,
-                          message: "Last name must be at least 2 characters",
-                        },
-                      })}
-                    />
-                    {errors.lastName && (
-                      <span className="error-text">
-                        {errors.lastName.message}
+                        {errors.fullName.message}
                       </span>
                     )}
                   </div>

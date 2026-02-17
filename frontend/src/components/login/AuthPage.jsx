@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RiMailLine , RiLockLine , RiUserLine , RiArrowRightLine, RiGoogleFill  } from '@remixicon/react';
 import { login } from '../../store/slices/authSlice';
 import './AuthPage.scss';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
+
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  withCredentials: true, // Include credentials for cookies
+});
+
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   
   const { register, handleSubmit, formState: { errors }, reset, watch } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      fullName: '',
-      email: '',
+      fullName: user?.fullName || '',
+      email: user?.email || '',
       password: '',
       confirmPassword: '',
       rememberMe: false
@@ -35,21 +44,31 @@ const AuthPage = () => {
   const onSubmit = async (data) => {
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      
+    try {
       if (isLogin) {
-        // Login action
-        const userData = {
+        // Login API call
+        const response = await axiosInstance.post('/auth/login', {
           email: data.email,
-          rememberMe: data.rememberMe
+          password: data.password,
+        });
+
+        // Store user data in Redux
+        const userData = {
+          fullName: response.data.fullName,
+          email: response.data.email
         };
         dispatch(login(userData));
         navigate('/');
         alert("Welcome back!");
       } else {
-        // Signup action
+        // Signup API call
+        const response = await axiosInstance.post('/auth/register', {
+          fullName: data.fullName,
+          email: data.email,
+          password: data.password,
+        });
+
+        // Store user data in Redux
         const newUser = {
           fullName: data.fullName,
           email: data.email
@@ -58,7 +77,13 @@ const AuthPage = () => {
         navigate('/');
         alert("Account created successfully!");
       }
-    }, 1500);
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message || 'An error occurred';
+      alert(`Error: ${errorMessage}`);
+      console.error('Auth error:', errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
