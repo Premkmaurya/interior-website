@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   RiFileList3Line,
   RiShoppingBag3Line,
@@ -10,10 +12,13 @@ import {
   RiCheckDoubleLine,
   RiTimeLine,
 } from "@remixicon/react";
+import { logout } from "../../store/slices/authSlice";
 import "./DashboardPage.scss";
 
 const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState("requests");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // --- MOCK DATA (In real app, fetch from API) ---
   const [userData] = useState({
@@ -41,6 +46,12 @@ const DashboardPage = () => {
   });
 
   const newPassword = watch("newPassword");
+
+  // Logout Handler
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
   // Profile Form Submit Handler
   const onProfileSubmit = async (data) => {
@@ -96,7 +107,7 @@ const DashboardPage = () => {
             <span className="eyebrow">CLIENT PORTAL</span>
             <h1>Welcome back, {userData.firstName}.</h1>
           </div>
-          <button className="logout-btn">
+          <button className="logout-btn" onClick={handleLogout}>
             <RiLogoutBoxRLine size={18} /> <span>Log Out</span>
           </button>
         </div>

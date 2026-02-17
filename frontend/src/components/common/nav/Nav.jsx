@@ -4,13 +4,18 @@ import {
   RiMenu2Fill,
   RiShoppingCart2Line,
   RiUserLine,
+  RiLogoutBoxRLine,
 } from "@remixicon/react";
+import { useSelector, useDispatch } from "react-redux";
 import gsap from "gsap";
 import "./Nav.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../../store/slices/authSlice";
 
 const Nav = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const sidebarRef = useRef(null);
   const backdropRef = useRef(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -56,10 +61,18 @@ const Nav = () => {
         <div className="navbar__logo">Norrlands trä</div>
         <div className="navbar__actions">
           <span
-            onClick={() => navigate("/login")}
+            onClick={() => {
+              if (isLoggedIn) {
+                dispatch(logout());
+                navigate("/");
+              } else {
+                navigate("/login");
+              }
+            }}
             className="navbar__actions-icon"
+            title={isLoggedIn ? "Logout" : "Login"}
           >
-            <RiUserLine />
+            {isLoggedIn ? <RiLogoutBoxRLine /> : <RiUserLine />}
           </span>
           <span
             onClick={() => navigate("/cart")}

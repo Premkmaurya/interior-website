@@ -11,6 +11,7 @@ import TandC from "../pages/T&C.jsx";
 import Login from "../pages/Login.jsx";
 import Cart from "../pages/Cart.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
+import ProtectedRoute from "../components/common/ProtectedRoute/ProtectedRoute.jsx";
 
 const AppRoute = () => {
   return (
@@ -24,9 +25,22 @@ const AppRoute = () => {
       <Route path="/terms-and-conditions" element={<TandC />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-
+      <Route 
+        path="/cart" 
+        element={
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/dashboard" 
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } 
+      />
     </Routes>
   );
 };

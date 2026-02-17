@@ -107,8 +107,26 @@ async function logoutUser(req, res) {
   }
 }
 
+async function checkAuth(req, res) {
+  try {
+    const token = req.cookies && req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await userModel.findById(decoded.userId);
+    if (!user) {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+    res.status(200).json({ user: { name: user.name, email: user.email } });
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token", error: error.message });
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
+  checkAuth,
 };

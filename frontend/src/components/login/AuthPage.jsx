@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RiMailLine , RiLockLine , RiUserLine , RiArrowRightLine, RiGoogleFill  } from '@remixicon/react';
+import { login } from '../../store/slices/authSlice';
 import './AuthPage.scss';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const { register, handleSubmit, formState: { errors }, reset, watch } = useForm({
     mode: 'onBlur',
     defaultValues: {
@@ -32,8 +38,26 @@ const AuthPage = () => {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      console.log('Form Data:', data);
-      alert(isLogin ? "Welcome back!" : "Account created successfully!");
+      
+      if (isLogin) {
+        // Login action
+        const userData = {
+          email: data.email,
+          rememberMe: data.rememberMe
+        };
+        dispatch(login(userData));
+        navigate('/');
+        alert("Welcome back!");
+      } else {
+        // Signup action
+        const newUser = {
+          fullName: data.fullName,
+          email: data.email
+        };
+        dispatch(login(newUser));
+        navigate('/');
+        alert("Account created successfully!");
+      }
     }, 1500);
   };
 
