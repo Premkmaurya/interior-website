@@ -1,25 +1,38 @@
 import React, { useState } from 'react';
-import { RiMailLine , RiLockLine , RiUserLine , RiArrowRightLine, RiGoogleFill  } from '@remixicon/react'; // Assuming lucide-react is installed
+import { useForm } from 'react-hook-form';
+import { RiMailLine , RiLockLine , RiUserLine , RiArrowRightLine, RiGoogleFill  } from '@remixicon/react';
 import './AuthPage.scss';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const { register, handleSubmit, formState: { errors }, reset, watch } = useForm({
+    mode: 'onBlur',
+    defaultValues: {
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      rememberMe: false
+    }
+  });
+
+  const password = watch('password');
 
   // Toggle between Login and Signup
   const toggleAuthMode = () => {
     setIsLogin(!isLogin);
-    // Optional: Clear form errors here
+    reset();
   };
 
-  // Mock Submit Handler
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // Form Submit Handler
+  const onSubmit = async (data) => {
     setIsLoading(true);
     
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
+      console.log('Form Data:', data);
       alert(isLogin ? "Welcome back!" : "Account created successfully!");
     }, 1500);
   };
@@ -56,7 +69,7 @@ const AuthPage = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="auth-form">
+          <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
             
             {/* Name Field (Sign Up Only) */}
             {!isLogin && (
@@ -64,8 +77,19 @@ const AuthPage = () => {
                 <label>Full Name</label>
                 <div className="input-wrapper">
                   <RiUserLine  size={18} className="input-icon" />
-                  <input type="text" placeholder="John Doe" required />
+                  <input 
+                    type="text" 
+                    placeholder="John Doe" 
+                    {...register('fullName', {
+                      required: isLogin ? false : 'Full name is required',
+                      minLength: {
+                        value: 2,
+                        message: 'Name must be at least 2 characters'
+                      }
+                    })}
+                  />
                 </div>
+                {errors.fullName && <span className="error-text">{errors.fullName.message}</span>}
               </div>
             )}
 
@@ -74,8 +98,19 @@ const AuthPage = () => {
               <label>Email Address</label>
               <div className="input-wrapper">
                 <RiMailLine  size={18} className="input-icon" />
-                <input type="email" placeholder="name@example.com" required />
+                <input 
+                  type="email" 
+                  placeholder="name@example.com" 
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: 'Please enter a valid email address'
+                    }
+                  })}
+                />
               </div>
+              {errors.email && <span className="error-text">{errors.email.message}</span>}
             </div>
 
             {/* Password Field */}
@@ -83,15 +118,48 @@ const AuthPage = () => {
               <label>Password</label>
               <div className="input-wrapper">
                 <RiLockLine  size={18} className="input-icon" />
-                <input type="password" placeholder="••••••••" required minLength={8} />
+                <input 
+                  type="password" 
+                  placeholder="••••••••" 
+                  {...register('password', {
+                    required: 'Password is required',
+                    minLength: {
+                      value: 8,
+                      message: 'Password must be at least 8 characters'
+                    }
+                  })}
+                />
               </div>
+              {errors.password && <span className="error-text">{errors.password.message}</span>}
             </div>
+
+            {/* Confirm Password Field (Sign Up Only) */}
+            {!isLogin && (
+              <div className="form-group">
+                <label>Confirm Password</label>
+                <div className="input-wrapper">
+                  <RiLockLine  size={18} className="input-icon" />
+                  <input 
+                    type="password" 
+                    placeholder="••••••••" 
+                    {...register('confirmPassword', {
+                      required: 'Please confirm your password',
+                      validate: (value) => value === password || 'Passwords do not match'
+                    })}
+                  />
+                </div>
+                {errors.confirmPassword && <span className="error-text">{errors.confirmPassword.message}</span>}
+              </div>
+            )}
 
             {/* Login Extras */}
             {isLogin && (
               <div className="form-extras">
                 <label className="checkbox-container">
-                  <input type="checkbox" />
+                  <input 
+                    type="checkbox" 
+                    {...register('rememberMe')}
+                  />
                   <span className="checkmark"></span>
                   Remember me
                 </label>

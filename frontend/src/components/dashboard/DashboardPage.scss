@@ -1,0 +1,362 @@
+// Variables (Matching your Design PDF)
+$bg-color: #F9F8F3; // Warm beige
+$card-bg: #FFFFFF; // White
+$text-main: #2C2C2C; // Charcoal
+$text-light: #666666; // Muted grey
+$accent-color: #CBBCAE; // Taupe
+$border-color: #E5E5E5;
+$shadow: 0 4px 20px rgba(0, 0, 0, 0.03); // Soft luxury shadow
+
+.client-dashboard {
+    min-height: 100vh;
+    background-color: $bg-color;
+    font-family: var(--font-family-roboto, sans-serif);
+    color: $text-main;
+    padding-bottom: 4rem;
+
+    // --- 1. HEADER ---
+    .dashboard-header {
+        background-color: $bg-color;
+        padding: 3rem 2rem 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            .branding {
+                .eyebrow {
+                    font-size: 0.75rem;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: $text-light;
+                    display: block;
+                    margin-bottom: 0.5rem;
+                }
+
+                h1 {
+                    font-family: var(--font-family, serif); // Serif for elegance
+                    font-size: 2.5rem;
+                    font-weight: 400;
+                    margin: 0;
+                }
+            }
+
+            .logout-btn {
+                background: none;
+                border: none;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: $text-light;
+                cursor: pointer;
+                font-size: 0.9rem;
+                transition: color 0.2s;
+
+                &:hover {
+                    color: #d32f2f;
+                }
+            }
+        }
+    }
+
+    // --- 2. TABS ---
+    .dashboard-tabs {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem 0;
+        display: flex;
+        gap: 2rem;
+        border-bottom: 1px solid $border-color;
+
+        .tab-btn {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            color: $text-light;
+            padding-bottom: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+
+            &:hover {
+                color: $text-main;
+            }
+
+            &.active {
+                color: $text-main;
+                font-weight: 500;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -1px;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: $text-main;
+                }
+            }
+        }
+    }
+
+    // --- 3. MAIN CONTENT ---
+    .dashboard-content {
+        max-width: 1000px;
+        margin: 3rem auto;
+        padding: 0 2rem;
+
+        .section-container {
+            animation: fadeIn 0.5s ease-out;
+
+            .section-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 2rem;
+
+                h2 {
+                    font-family: var(--font-family, serif);
+                    font-size: 1.8rem;
+                    font-weight: 400;
+                }
+
+                .primary-action-btn {
+                    background-color: $text-main;
+                    color: #fff;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 50px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 0.9rem;
+                    cursor: pointer;
+                    transition: transform 0.2s;
+
+                    &:hover {
+                        transform: translateY(-2px);
+                    }
+                }
+            }
+        }
+
+        // --- CARDS (Requests & Orders) ---
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .data-card {
+            background: $card-bg;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: $shadow;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+
+            .card-main {
+                .card-id {
+                    display: block;
+                    font-size: 0.75rem;
+                    color: $text-light;
+                    letter-spacing: 1px;
+                    margin-bottom: 0.5rem;
+                }
+
+                .card-title {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    margin-bottom: 0.5rem;
+                }
+
+                .card-date {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    font-size: 0.85rem;
+                    color: $text-light;
+                }
+
+                .meta-row {
+                    font-size: 0.9rem;
+                    color: $text-light;
+
+                    .dot {
+                        margin: 0 8px;
+                    }
+                }
+            }
+
+            .card-meta {
+                text-align: right;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 1rem;
+
+                .status-badge {
+                    padding: 6px 12px;
+                    border-radius: 20px;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+
+                    &.status-pending {
+                        background: #FFF4E5;
+                        color: #B76E00;
+                    }
+
+                    &.status-success {
+                        background: #E6F4EA;
+                        color: #137333;
+                    }
+
+                    &.status-active {
+                        background: #E8F0FE;
+                        color: #1967D2;
+                    }
+                }
+
+                .icon-btn {
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    color: $text-light;
+
+                    &:hover {
+                        color: $text-main;
+                    }
+                }
+
+                .text-link {
+                    background: none;
+                    border: none;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    color: $text-main;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+        // --- PROFILE FORM ---
+        .profile-form-wrapper {
+            background: $card-bg;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: $shadow;
+
+            .profile-form {
+                .form-row {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+
+                    @media (max-width: 600px) {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                .form-group {
+                    margin-bottom: 1.5rem;
+
+                    label {
+                        display: block;
+                        font-size: 0.85rem;
+                        color: $text-light;
+                        margin-bottom: 0.5rem;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding: 12px 0;
+                        border: none;
+                        border-bottom: 1px solid $border-color; // Minimal border
+                        font-size: 1rem;
+                        color: $text-main;
+                        font-family: inherit;
+                        transition: border-color 0.3s;
+
+                        &:focus {
+                            outline: none;
+                            border-bottom-color: $text-main;
+                        }
+
+                        &.readonly {
+                            color: $text-light;
+                            background: transparent;
+                            cursor: not-allowed;
+                        }
+
+                        &:invalid {
+                            border-bottom-color: #ef4444;
+                        }
+                    }
+
+                    .error-text {
+                        display: block;
+                        font-size: 0.75rem;
+                        color: #ef4444;
+                        margin-top: 0.4rem;
+                        font-weight: 500;
+                    }
+                }
+
+                .divider {
+                    height: 1px;
+                    background-color: $border-color;
+                    margin: 2rem 0;
+                }
+
+                .form-actions {
+                    margin-top: 2rem;
+                    text-align: right;
+
+                    .save-btn {
+                        background-color: $text-main;
+                        color: #fff;
+                        border: none;
+                        padding: 12px 30px;
+                        border-radius: 50px;
+                        font-size: 1rem;
+                        cursor: pointer;
+                        transition: opacity 0.3s;
+
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
