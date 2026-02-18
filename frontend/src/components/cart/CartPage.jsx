@@ -1,28 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { RiDeleteBinLine, RiArrowRightLine, RiAddLine, RiSubtractLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { removeFromCart, updateQuantity } from '../../store/slices/cartSlice';
 import './CartPage.scss';
 
 const CartPage = () => {
-  // Mock Data: Replace with your Context or Redux state
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Oak Minimalist Chair",
-      variant: "Natural Wood",
-      price: 2450.00,
-      quantity: 1,
-      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=600&auto=format&fit=crop"
-    },
-    {
-      id: 2,
-      name: "Artisan Sourdough Basket",
-      variant: "Set of 3 • Organic",
-      price: 450.00,
-      quantity: 2,
-      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop"
-    }
-  ]);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
 
   // Calculations
   const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -30,18 +15,14 @@ const CartPage = () => {
   const total = subtotal + shipping;
 
   // Handlers
-  const updateQuantity = (id, change) => {
-    setCartItems(items => items.map(item => {
-      if (item.id === id) {
-        const newQty = Math.max(1, item.quantity + change);
-        return { ...item, quantity: newQty };
-      }
-      return item;
-    }));
+  const handleUpdateQuantity = (id, newQuantity) => {
+    if (newQuantity > 0) {
+      dispatch(updateQuantity({ id, quantity: newQuantity }));
+    }
   };
 
-  const removeItem = (id) => {
-    setCartItems(items => items.filter(item => item.id !== id));
+  const handleRemoveItem = (id) => {
+    dispatch(removeFromCart(id));
   };
 
   // --- EMPTY STATE ---
@@ -87,11 +68,11 @@ const CartPage = () => {
 
                   <div className="info-bottom">
                     <div className="quantity-wrapper">
-                      <button onClick={() => updateQuantity(item.id, -1)}><RiSubtractLine /></button>
+                      <button onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}><RiSubtractLine /></button>
                       <span>{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, 1)}><RiAddLine /></button>
+                      <button onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}><RiAddLine /></button>
                     </div>
-                    <button className="remove-btn" onClick={() => removeItem(item.id)}>
+                    <button className="remove-btn" onClick={() => handleRemoveItem(item.id)}>
                       Remove
                     </button>
                   </div>

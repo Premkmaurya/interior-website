@@ -29,6 +29,7 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       width: 50vw;
       height: 80vh;
       position: relative;
+
       .swiper {
         width: 100%;
         height: 100%;
@@ -50,6 +51,7 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           border-radius: 4px;
         }
       }
+
       .swiper-button-next,
       .swiper-button-prev {
         display: none;
@@ -75,6 +77,7 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           color: $text-black;
         }
       }
+
       .swiper-btn-next {
         position: absolute;
         top: 50%;
@@ -144,34 +147,87 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
       .cta-group {
         display: flex;
+        flex-direction: column;
         gap: 15px;
         margin-bottom: 30px;
+        align-items: flex-start;
 
-        button {
-          padding: 16px 32px;
-          font-weight: 700;
-          cursor: pointer;
-          transition: all 0.3s ease; // [cite: 68]
-        }
+        .quantity-selector {
+          display: flex;
+          align-items: center;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          padding: 0;
+          height: fit-content;
 
-        .btn-primary {
-          background: $text-black;
-          color: $white;
-          border: 1px solid $text-black;
-          flex: 2;
+          .qty-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            color: $text-black;
+            transition: background 0.3s ease;
 
-          &:hover {
-            background: $text-black;
+            &:hover {
+              background: $muted-beige;
+            }
+          }
+
+          .qty-input {
+            width: 50px;
+            border: none;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: $text-black;
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+
+            &[type="number"] {
+              -moz-appearance: textfield;
+            }
           }
         }
 
-        .btn-secondary {
-          background: transparent;
-          border: 1px solid #ccc;
-          flex: 1;
+        .button-group {
+          width: 100%;
+          height: 20vh;
+          button {
+            margin-right: 1.1rem;
+            padding: 16px 32px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease; // [cite: 68]
+          }
 
-          &:hover {
-            background: $muted-beige;
+          .btn-primary {
+            background: $text-black;
+            color: $white;
+            border: 1px solid $text-black;
+            flex: 2;
+
+            &:hover {
+              background: $text-black;
+            }
+          }
+
+          .btn-secondary {
+            background: transparent;
+            border: 1px solid #ccc;
+            flex: 1;
+
+            &:hover {
+              background: $muted-beige;
+            }
           }
         }
       }
@@ -231,10 +287,12 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       display: none;
     }
   }
+
   .swiper-category {
     display: none;
     width: 100%;
     height: 100%;
+
     @media screen and (max-width:768px) {
       display: block;
     }
@@ -373,6 +431,7 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

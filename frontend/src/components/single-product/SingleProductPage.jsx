@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/slices/cartSlice";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import "./SingleProductPage.scss";
 
@@ -48,9 +50,11 @@ const SingleProductPage = () => {
   const { id } = useParams();
   const location = useLocation();
   const product = location.state?.product;
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [quantity, setQuantity] = useState(1);
 
   useScrollToTop();
 
@@ -84,6 +88,19 @@ const SingleProductPage = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
+  };
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: displayProduct.id || id,
+      name: displayProduct.name,
+      image: displayProduct.image,
+      price: displayProduct.price,
+      sku: displayProduct.sku,
+      quantity: quantity,
+    };
+    dispatch(addToCart(cartItem));
+    setQuantity(1); // Reset quantity after adding
   };
 
   return (
@@ -164,8 +181,35 @@ const SingleProductPage = () => {
           </div>
 
           <div className="cta-group">
-            <button className="btn-primary">ADD TO CART</button>
-            <button className="btn-secondary">WHERE TO BUY</button>
+            <div className="quantity-selector">
+              <button
+                className="qty-btn"
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              >
+                −
+              </button>
+              <input
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={(e) =>
+                  setQuantity(Math.max(1, parseInt(e.target.value) || 1))
+                }
+                className="qty-input"
+              />
+              <button
+                className="qty-btn"
+                onClick={() => setQuantity(quantity + 1)}
+              >
+                +
+              </button>
+            </div>
+            <div className="button-group">
+              <button className="btn-primary" onClick={handleAddToCart}>
+                ADD TO CART
+              </button>
+              <button className="btn-secondary">WHERE TO BUY</button>
+            </div>
           </div>
 
           <div className="documentation">
@@ -213,19 +257,19 @@ const SingleProductPage = () => {
             modules={[Autoplay, Navigation]}
             className="mySwiper"
           >
-              {categories.map((cat) => (
-                <SwiperSlide key={cat.id}>
-                  <div className="category-card">
-                    <div className="image-wrapper">
-                      <img src={cat.image} alt={cat.name} loading="lazy" />
-                      <div className="overlay">
-                        <span className="view-label">VIEW COLLECTION</span>
-                      </div>
+            {categories.map((cat) => (
+              <SwiperSlide key={cat.id}>
+                <div className="category-card">
+                  <div className="image-wrapper">
+                    <img src={cat.image} alt={cat.name} loading="lazy" />
+                    <div className="overlay">
+                      <span className="view-label">VIEW COLLECTION</span>
                     </div>
-                    <h3 className="category-name">{cat.name}</h3>
                   </div>
-                </SwiperSlide>
-              ))}
+                  <h3 className="category-name">{cat.name}</h3>
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
           <div className="swiper-btn-next">
             <RiArrowRightSLine />
@@ -235,7 +279,6 @@ const SingleProductPage = () => {
           </div>
         </div>
       </section>
-
 
       {/* Image Modal */}
       {isModalOpen && (
