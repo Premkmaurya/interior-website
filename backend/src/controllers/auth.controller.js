@@ -7,7 +7,7 @@ async function registerUser(req, res) {
     const { fullName, email, password } = req.body;
 
     const existingUser = await userModel.findOne({
-      email
+      email,
     });
     if (existingUser) {
       return res.status(400).json({
@@ -69,6 +69,8 @@ async function loginUser(req, res) {
     const token = jwt.sign(
       {
         userId: user._id,
+        email: user.email,
+        fullName: user.fullName,
       },
       process.env.JWT_SECRET,
       {
@@ -77,7 +79,6 @@ async function loginUser(req, res) {
     );
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 3600000,
     });
@@ -108,20 +109,11 @@ async function logoutUser(req, res) {
 }
 
 async function checkAuth(req, res) {
-  try {
-    const token = req.cookies && req.cookies.token;
-    if (!token) {
-      return res.status(401).json({ message: "Not authenticated" });
-    }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await userModel.findById(decoded.userId);
-    if (!user) {
-      return res.status(401).json({ message: "Invalid token" });
-    }
-    res.status(200).json({ user: { name: user.name, email: user.email } });
-  } catch (error) {
-    res.status(401).json({ message: "Invalid token", error: error.message });
-  }
+  const user = req.user;
+  res.status(200).json({
+    message: "User is authenticated",
+    email: user.email,
+  });
 }
 
 module.exports = {

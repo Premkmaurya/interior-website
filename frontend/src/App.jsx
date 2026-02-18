@@ -15,7 +15,7 @@ const App = () => {
   // Restore auth state from cookies on app mount
   useEffect(() => {
     dispatch(checkAuth())
-  }, [dispatch])
+  }, [])
 
   return (
     <div>

@@ -54,7 +54,6 @@ const DashboardPage = () => {
 
   // Profile Form Submit Handler
   const onProfileSubmit = async (data) => {
-    console.log("Profile Data:", data);
     alert("Profile updated successfully!");
   };
 
