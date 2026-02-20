@@ -1,19 +1,29 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const productModel = require('../models/product.model');
-const productController = require('../controllers/product.controller');
+const multer = require("multer");
+const authMiddleware = require("../middleware/auth.middleware");
+const productController = require("../controllers/product.controller");
 
+const upload = multer({ storage: multer.memoryStorage() });
 
-router.get('/', productController.getAllProducts);
+router.get("/", productController.getAllProducts);
+cccal;
 
-router.get('/:id', productController.getProductById);
+router.get("/:id", productController.getProductById);
 
-router.post('/', productController.createProduct);
+router.post(
+  "/",
+  authMiddleware,
+  upload.array("images", 5),
+  productController.createProduct,
+);
 
-router.put('/:id', productController.updateProduct);
-
-router.delete('/:id', productController.deleteProduct);
-
-
+router.put(
+  "/:id",
+  authMiddleware,
+  upload.array("images", 5),
+  productController.updateProduct,
+);
+router.delete("/:id", authMiddleware, productController.deleteProduct);
 
 module.exports = router;
