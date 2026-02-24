@@ -20,36 +20,48 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   // 5.1 Hero Section [cite: 133]
   .product-hero {
-    height: 80vh;
+    height: clamp(60vh, 80vh, 100vh);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    gap: 4rem;
+    gap: clamp(2rem, 4vw, 4rem);
     background:
       linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-      url("/img/image.jpg") center/cover; // Action-focused [cite: 135, 139]
+      url("/img/image.jpg") center/cover;
     color: white;
-    padding: 0 5%;
+    padding: clamp(2rem, 3vw, 5%);
+
+    @media (max-width: 768px) {
+      height: clamp(40vh, 60vh, 80vh);
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      padding: clamp(1.5rem, 2vw, 3%);
+    }
+
+    @media (max-width: 480px) {
+      height: 50vh;
+      padding: 1.5rem;
+      gap: 1.5rem;
+    }
 
     .hero-content {
       display: flex;
       align-items: center;
       flex-direction: column;
-      gap: 2rem;
+      gap: clamp(1rem, 2vw, 2rem);
       h1 {
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        margin-bottom: 1rem;
+        font-size: clamp(1.5rem, 5vw, 3.5rem);
+        margin-bottom: clamp(0.5rem, 1vw, 1rem);
       }
       .btn-primary {
-        background-color: transparent; // Green CTA
+        background-color: transparent;
         color: white;
         font-family: var(--font-family);
-        font-size: 1rem;
-        width: 20vw;
+        font-size: clamp(0.85rem, 1.5vw, 1rem);
+        width: clamp(150px, 20vw, 300px);
         border-radius: var(--border-radius-md);
-        padding: var(--padding-md) var(--padding-sm);
+        padding: clamp(10px, 1.5vw, 16px) clamp(15px, 2vw, 20px);
         border: 2px solid white;
         cursor: pointer;
         font-weight: 500;
@@ -156,33 +168,44 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   // 5.2 Product Grid Layout [cite: 128]
   .grid-container {
-    margin-top: 2rem;
+    margin-top: clamp(1rem, 3vw, 2rem);
     max-width: 1400px;
-    padding: var(--padding-lg);
+    padding: clamp(1.5rem, 3vw, var(--padding-lg));
+    margin-left: auto;
+    margin-right: auto;
 
     .section-header {
-      margin-bottom: 40px;
+      margin-bottom: clamp(2rem, 3vw, 40px);
       h2 {
-        font-size: 2rem;
-        margin-bottom: 10px;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin-bottom: clamp(0.5rem, 1vw, 10px);
       }
     }
 
     .product-grid {
       display: grid;
-      gap: 30px;
-      // Multi-column responsive grid [cite: 129, 130]
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: clamp(1.5rem, 2.5vw, 30px);
+      grid-template-columns: repeat(auto-fill, minmax(clamp(200px, 40vw, 280px), 1fr));
+
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 45vw, 200px), 1fr));
+        gap: clamp(1rem, 2vw, 20px);
+      }
+
+      @media (max-width: 480px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
     }
   }
   // 5.3 Product Card Design [cite: 170]
   .product-card {
     background-color: whitesmoke;
-    border-radius: 24px; // Rounded "modern" corners [cite: 99]
-    padding: 16px;
+    border-radius: clamp(1rem, 3vw, 24px);
+    padding: clamp(1rem, 2vw, 16px);
     width: 100%;
     max-width: 320px;
-    transition: transform 0.2s ease; // Functional animation [cite: 178]
+    transition: transform 0.2s ease;
     position: relative;
     cursor: pointer;
 
@@ -203,12 +226,12 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       // "Best Price" Badge
       .card-badge {
         position: absolute;
-        top: 8px;
-        left: 8px;
+        top: clamp(0.5rem, 1vw, 8px);
+        left: clamp(0.5rem, 1vw, 8px);
         background: whitesmoke;
-        padding: 8px 16px;
+        padding: clamp(6px, 1vw, 8px) clamp(12px, 1.5vw, 16px);
         border-radius: 20px;
-        font-size: 0.8rem;
+        font-size: clamp(0.7rem, 1.2vw, 0.8rem);
         font-weight: 600;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       }
@@ -224,20 +247,28 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .product-info {
-      margin-top: 16px;
+      margin-top: clamp(1rem, 1.5vw, 16px);
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
+      flex-wrap: wrap;
+      gap: clamp(0.5rem, 1vw, 1rem);
+
+      @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
       .product-name {
-        font-size: 1rem;
+        font-size: clamp(0.85rem, 1.3vw, 1rem);
         color: var(--color-primary);
-        font-weight: 500; // Medium-weight headings [cite: 117]
-        margin-bottom: 8px;
+        font-weight: 500;
+        margin-bottom: clamp(0.5rem, 0.8vw, 8px);
+        min-width: 50%;
       }
 
       .product-price {
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 1.5vw, 1.1rem);
         font-weight: 700;
         color: var(--color-primary);
       }
@@ -246,9 +277,9 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       .bag-button {
         background: whitesmoke;
         border: none;
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
+        width: clamp(2.5rem, 4vw, 48px);
+        height: clamp(2.5rem, 4vw, 48px);
+        border-radius: clamp(0.75rem, 1.5vw, 12px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -257,7 +288,7 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         transition: background 0.2s;
 
         &:hover {
-          background: #eeeeee; // Simple hover state [cite: 175]
+          background: #eeeeee;
         }
       }
     }
@@ -267,45 +298,50 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   .service-highlights {
     display: flex;
     justify-content: center;
-    gap: 50px;
-    padding: var(--padding-sm);
+    gap: clamp(2rem, 4vw, 50px);
+    padding: clamp(1.5rem, 3vw, var(--padding-sm));
     border-top: 1px solid #eee;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: clamp(1.5rem, 2.5vw, 30px);
+    }
 
     .highlight-item {
       text-align: center;
+      flex: 1;
+      min-width: 150px;
+
       span {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 3vw, 2rem);
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: clamp(0.5rem, 1vw, 10px);
       }
       h2 {
-        font-size: 1rem;
-        margin-bottom: 5px;
+        font-size: clamp(0.85rem, 1.3vw, 1rem);
+        margin-bottom: clamp(0.3rem, 0.5vw, 5px);
       }
       p {
         font-weight: 500;
         text-align: center;
         color: var(--color-secondary);
-        font-size: 0.9rem;
-      } // Trust building [cite: 154]
-    }
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-      gap: 30px;
+        font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+      }
     }
   }
 
   .faq-container {
-    margin-top: 2rem;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
     max-width: 700px;
-    width: 100%;
-    margin: 50px auto;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     font-family: var(--font-family);
 
     .trusted-by {
-      font-size: 12px;
+      font-size: clamp(0.65rem, 1.2vw, 12px);
       font-weight: 800;
       letter-spacing: 1px;
       color: $secondary-text;
@@ -313,9 +349,9 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .faq-title {
-      font-size: 36px;
+      font-size: clamp(1.5rem, 4vw, 36px);
       font-weight: 700;
-      margin: 10px 0 40px;
+      margin: clamp(0.75rem, 1.5vw, 10px) 0 clamp(2rem, 3vw, 40px);
       color: $primary-text;
       line-height: 1.2;
     }
@@ -324,11 +360,11 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   .accordion {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: clamp(0.75rem, 1.5vw, 12px);
 
     &-item {
       background-color: $item-bg;
-      border-radius: 24px;
+      border-radius: clamp(1rem, 2vw, 24px);
       overflow: hidden;
       transition: background-color $transition;
       text-align: left;
@@ -340,28 +376,28 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         border-color: rgba(0, 0, 0, 0.02);
 
         .accordion-content {
-          grid-template-rows: 1fr; // The "magic" trick for smooth height animation
+          grid-template-rows: 1fr;
         }
       }
     }
 
     &-header {
-      padding: 20px 24px;
+      padding: clamp(1.25rem, 2vw, 20px) clamp(1.5rem, 2.5vw, 24px);
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
 
       h3 {
-        font-size: 16px;
+        font-size: clamp(0.9rem, 1.5vw, 16px);
         font-weight: 600;
         color: $primary-text;
         margin: 0;
       }
 
       .icon-wrapper {
-        width: 32px;
-        height: 32px;
+        width: clamp(2rem, 3vw, 32px);
+        height: clamp(2rem, 3vw, 32px);
         background: white;
         border-radius: 50%;
         display: flex;
@@ -369,9 +405,10 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         justify-content: center;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         transition: all ease 0.5s;
+        flex-shrink: 0;
 
         .icon {
-          font-size: 20px;
+          font-size: clamp(1rem, 1.5vw, 20px);
           color: $primary-text;
         }
       }
@@ -379,17 +416,17 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     &-content {
       display: grid;
-      grid-template-rows: 0fr; // Collapsed state
+      grid-template-rows: 0fr;
       transition: grid-template-rows $transition;
 
       .inner-text {
-        overflow: hidden; // Required for the grid height trick
-        padding: 0 24px;
+        overflow: hidden;
+        padding: 0 clamp(1.5rem, 2.5vw, 24px);
 
         p {
           font-family: var(--font-family-roboto);
-          padding-bottom: 24px;
-          font-size: 14px;
+          padding-bottom: clamp(1.5rem, 2vw, 24px);
+          font-size: clamp(0.85rem, 1.3vw, 14px);
           line-height: 1.6;
           color: $secondary-text;
           margin: 0;
@@ -402,20 +439,24 @@ $transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .footer__top {
-    margin-top: 2rem;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
     display: flex;
     justify-content: center;
     width: 100%;
     background-color: #000;
     color: #fff;
-    padding: 3rem 2rem;
+    padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2rem);
+
     .footer__engagement-content {
+      text-align: center;
+
       h2 {
-        font-size: 1.9rem;
+        font-size: clamp(1.5rem, 4vw, 1.9rem);
+        margin: 0;
       }
       p {
-        font-size: 1rem;
-        margin-top: 1rem;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        margin: clamp(0.75rem, 1.5vw, 1rem) 0 0;
       }
     }
   }

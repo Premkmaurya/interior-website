@@ -8,27 +8,38 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 .pdp-wrapper {
   background-color: $bg-ivory;
   min-height: 100vh;
-  padding: 40px;
+  padding: clamp(1.5rem, 3vw, 40px);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  box-sizing: border-box;
 
   .product-hero {
     display: grid;
-    grid-template-columns: 1fr 1fr; // Desktop Layout [cite: 29]
-    gap: 80px;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 80px);
     max-width: 1200px;
     width: 100%;
 
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: clamp(1.5rem, 3vw, 40px);
+    }
+
     @media (max-width: 768px) {
-      grid-template-columns: 1fr; // Mobile Stacking [cite: 32]
+      grid-template-columns: 1fr;
+      gap: clamp(1rem, 2vw, 20px);
     }
 
     .image-container {
-      width: 50vw;
-      height: 80vh;
+      width: clamp(100%, 50vw, 50vw);
+      height: clamp(250px, 80vh, 80vh);
       position: relative;
+
+      @media (max-width: 1024px) {
+        width: 100%;
+      }
 
       .swiper {
         width: 100%;
@@ -60,12 +71,12 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       .swiper-btn-prev {
         position: absolute;
         top: 50%;
-        left: -6%;
+        left: clamp(-2%, -6%, -7%);
         transform: translateY(-50%);
         background: rgba(255, 255, 255, 0.8);
         border-radius: 50%;
-        width: 2rem;
-        height: 2rem;
+        width: clamp(2rem, 4vw, 2rem);
+        height: clamp(2rem, 4vw, 2rem);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -73,7 +84,7 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         z-index: 10;
 
         svg {
-          font-size: 50px;
+          font-size: clamp(1.5rem, 3vw, 50px);
           color: $text-black;
         }
       }
@@ -81,12 +92,12 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       .swiper-btn-next {
         position: absolute;
         top: 50%;
-        right: -7%;
+        right: clamp(-2%, -7%, -7%);
         transform: translateY(-50%);
         background: rgba(255, 255, 255, 0.8);
         border-radius: 50%;
-        width: 2rem;
-        height: 2rem;
+        width: clamp(2rem, 4vw, 2rem);
+        height: clamp(2rem, 4vw, 2rem);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -94,7 +105,7 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         z-index: 10;
 
         svg {
-          font-size: 40px;
+          font-size: clamp(1.2rem, 2.5vw, 40px);
           color: $text-black;
         }
       }
@@ -106,41 +117,41 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       justify-content: center;
 
       .category-label {
-        font-size: 12px;
+        font-size: clamp(0.75rem, 1.2vw, 12px);
         letter-spacing: 2px;
         font-weight: 600;
-        margin-bottom: 12px;
+        margin-bottom: clamp(0.75rem, 1.5vw, 12px);
         color: $text-black;
       }
 
       .product-title {
         font-family: var(--font-family-alt);
-        font-size: 48px;
+        font-size: clamp(1.5rem, 4vw, 48px);
         font-weight: 700;
-        text-transform: uppercase; // [cite: 24]
-        margin: 0 0 20px 0;
+        text-transform: uppercase;
+        margin: 0 0 clamp(1rem, 2vw, 20px) 0;
       }
 
       .product-description {
         font-family: var(--font-family);
-        font-size: 16px;
+        font-size: clamp(0.9rem, 1.5vw, 16px);
         line-height: 1.6;
         color: $text-black;
-        margin-bottom: 30px;
+        margin-bottom: clamp(1.5rem, 2.5vw, 30px);
         max-width: 400px;
       }
 
       .product-meta {
-        margin-bottom: 40px;
+        margin-bottom: clamp(2rem, 3vw, 40px);
 
         .price {
-          font-size: 24px;
+          font-size: clamp(1.2rem, 2vw, 24px);
           font-weight: 600;
-          margin-right: 20px;
+          margin-right: clamp(1rem, 2vw, 20px);
         }
 
         .sku {
-          font-size: 12px;
+          font-size: clamp(0.75rem, 1.2vw, 12px);
           color: #888;
         }
       }
@@ -148,9 +159,13 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       .cta-group {
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        margin-bottom: 30px;
+        gap: clamp(0.75rem, 1.5vw, 15px);
+        margin-bottom: clamp(1.5rem, 2.5vw, 30px);
         align-items: flex-start;
+
+        @media (max-width: 480px) {
+          align-items: stretch;
+        }
 
         .quantity-selector {
           display: flex;
@@ -163,10 +178,10 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           .qty-btn {
             background: transparent;
             border: none;
-            padding: 8px 12px;
+            padding: clamp(6px, 1.2vw, 8px) clamp(8px, 1.5vw, 12px);
             cursor: pointer;
             font-weight: bold;
-            font-size: 18px;
+            font-size: clamp(1rem, 1.5vw, 18px);
             color: $text-black;
             transition: background 0.3s ease;
 
@@ -181,8 +196,8 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border-left: 1px solid #ccc;
             border-right: 1px solid #ccc;
             text-align: center;
-            padding: 8px 0;
-            font-size: 14px;
+            padding: clamp(6px, 1.2vw, 8px) 0;
+            font-size: clamp(0.875rem, 1.2vw, 14px);
             font-weight: 600;
             color: $text-black;
 
@@ -200,13 +215,20 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
         .button-group {
           width: 100%;
-          height: 20vh;
+          display: flex;
+          gap: clamp(0.5rem, 1.5vw, 1.1rem);
+          flex-wrap: wrap;
+
           button {
-            margin-right: 1.1rem;
-            padding: 16px 32px;
+            padding: clamp(10px, 2vw, 16px) clamp(20px, 3vw, 32px);
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease; // [cite: 68]
+            transition: all 0.3s ease;
+            font-size: clamp(0.9rem, 1.3vw, 1rem);
+          }
+
+          @media (max-width: 480px) {
+            flex-direction: column;
           }
 
           .btn-primary {
@@ -215,8 +237,13 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border: 1px solid $text-black;
             flex: 2;
 
-            &:hover {
+            &:hover:not(:disabled) {
               background: $text-black;
+            }
+
+            &:disabled {
+              opacity: 0.6;
+              cursor: not-allowed;
             }
           }
 
@@ -230,11 +257,44 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             }
           }
         }
+
+        .message {
+          margin-top: clamp(1rem, 1.5vw, 16px);
+          padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
+          border-radius: 4px;
+          font-size: clamp(0.85rem, 1.2vw, 14px);
+          font-weight: 500;
+          text-align: center;
+          animation: slideIn 0.3s ease;
+
+          &.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+          }
+
+          &.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+          }
+        }
+
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
       }
 
       .documentation {
         .doc-link {
-          font-size: 13px;
+          font-size: clamp(0.8rem, 1.2vw, 13px);
           text-decoration: none;
           color: $text-black;
           border-bottom: 1px solid #ccc;
@@ -250,37 +310,38 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   .suggested-section {
     background-color: $bg-ivory;
-    padding: 100px 40px;
+    padding: clamp(2rem, 8vw, 100px) clamp(1.5rem, 3vw, 40px);
     max-width: 1400px;
     margin: 0 auto;
 
     .section-header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: clamp(2rem, 5vw, 60px);
 
       .section-title {
         font-family: var(--font-family-alt);
-        font-size: 32px;
+        font-size: clamp(1.5rem, 4vw, 32px);
         text-transform: uppercase;
         letter-spacing: 1px;
-        margin-bottom: 10px;
+        margin-bottom: clamp(0.5rem, 1vw, 10px);
       }
 
       .section-subtitle {
         font-family: var(--font-family-alt);
         color: $text-black;
-        font-size: 14px;
+        font-size: clamp(0.85rem, 1.2vw, 14px);
       }
     }
   }
 
   .category-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); // 4-column grid for desktop
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1rem, 2vw, 24px);
 
     @media (max-width: 1024px) {
       grid-template-columns: repeat(2, 1fr);
+      gap: clamp(0.75rem, 1.5vw, 18px);
     }
 
     @media (max-width: 768px) {
@@ -303,9 +364,9 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     .image-wrapper {
       position: relative;
-      aspect-ratio: 4 / 5; // Portrait orientation for luxury feel
+      aspect-ratio: 4 / 5;
       overflow: hidden;
-      margin-bottom: 15px;
+      margin-bottom: clamp(0.75rem, 1.5vw, 15px);
       background-color: #eee;
 
       img {
@@ -327,7 +388,7 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
         .view-label {
           color: white;
-          font-size: 12px;
+          font-size: clamp(0.75rem, 1.2vw, 12px);
           font-weight: 700;
           letter-spacing: 2px;
           border-bottom: 1px solid white;
@@ -338,7 +399,7 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     .category-name {
       font-family: var(--font-family-alt);
-      font-size: 14px;
+      font-size: clamp(0.85rem, 1.2vw, 14px);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -399,19 +460,19 @@ $transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     .modal-close-btn {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: clamp(1rem, 2vw, 20px);
+      right: clamp(1rem, 2vw, 20px);
       background-color: rgba(255, 255, 255, 0.2);
       border: none;
       color: white;
-      width: 50px;
-      height: 50px;
+      width: clamp(2.5rem, 5vw, 50px);
+      height: clamp(2.5rem, 5vw, 50px);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 28px;
+      font-size: clamp(1.5rem, 3vw, 28px);
       transition: all 0.3s ease;
       z-index: 10000;
 

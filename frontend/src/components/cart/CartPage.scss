@@ -8,34 +8,37 @@ $border-color: #E5E5E5; // Subtle borders
 .cart-page {
     min-height: 100vh;
     background-color: $bg-color;
-    padding: 4rem 2rem;
+    padding: clamp(1rem, 3vw, 4rem) clamp(1rem, 2vw, 2rem);
     font-family: var(--font-family-roboto);
     color: $text-main;
+    box-sizing: border-box;
 
     .container {
         max-width: 1200px;
         margin: 0 auto;
+        width: 100%;
     }
 
     // --- Header ---
     .cart-header {
         display: flex;
         align-items: baseline;
-        gap: 1rem;
-        margin-bottom: 3rem;
+        gap: clamp(0.5rem, 2vw, 1rem);
+        margin-bottom: clamp(1.5rem, 3vw, 3rem);
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        padding-bottom: 1rem;
+        padding-bottom: clamp(0.75rem, 1.5vw, 1rem);
+        flex-wrap: wrap;
 
         h1 {
             font-family: var(--font-family); // Editorial Serif
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             font-weight: 400;
             margin: 0;
         }
 
         .count {
             font-family: var(--font-family-alt);
-            font-size: 1rem;
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
             color: $text-light;
         }
     }
@@ -44,11 +47,11 @@ $border-color: #E5E5E5; // Subtle borders
     .cart-layout {
         display: grid;
         grid-template-columns: 2fr 1fr; // Wide list, narrower summary
-        gap: 4rem;
+        gap: clamp(1.5rem, 3vw, 4rem);
 
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
             grid-template-columns: 1fr;
-            gap: 3rem;
+            gap: clamp(1.5rem, 2vw, 3rem);
         }
     }
 
@@ -56,17 +59,23 @@ $border-color: #E5E5E5; // Subtle borders
     .cart-items {
         .cart-item {
             display: grid;
-            grid-template-columns: 120px 1fr auto; // Image | Info | Price
-            gap: 2rem;
-            padding-bottom: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: clamp(80px, 15%, 120px) 1fr auto; // Image | Info | Price
+            gap: clamp(1rem, 2vw, 2rem);
+            padding-bottom: clamp(1rem, 2vw, 2rem);
+            margin-bottom: clamp(1rem, 2vw, 2rem);
             border-bottom: 1px solid $border-color;
             align-items: start;
 
-            @media (max-width: 600px) {
-                grid-template-columns: 80px 1fr;
-                gap: 1rem;
-                position: relative;
+            @media (max-width: 768px) {
+                grid-template-columns: clamp(60px, 20%, 80px) 1fr;
+                gap: clamp(0.75rem, 1.5vw, 1rem);
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            @media (max-width: 480px) {
+                grid-template-columns: 70px 1fr;
+                gap: 0.75rem;
             }
 
             .item-image {
@@ -91,24 +100,25 @@ $border-color: #E5E5E5; // Subtle borders
 
                 .product-name {
                     font-family: var(--font-family); // Serif
-                    font-size: 1.25rem;
-                    margin-bottom: 0.5rem;
+                    font-size: clamp(1rem, 1.5vw, 1.25rem);
+                    margin-bottom: clamp(0.3rem, 0.75vw, 0.5rem);
                     font-weight: 400;
                     color: $text-main;
                 }
 
                 .product-variant {
                     font-family: var(--font-family-roboto);
-                    font-size: 0.9rem;
+                    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
                     color: $text-light;
-                    margin-bottom: 1rem;
+                    margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
                 }
 
                 .info-bottom {
                     display: flex;
                     align-items: center;
-                    gap: 1.5rem;
+                    gap: clamp(0.75rem, 2vw, 1.5rem);
                     margin-top: auto;
+                    flex-wrap: wrap;
 
                     .quantity-wrapper {
                         display: flex;
@@ -125,6 +135,7 @@ $border-color: #E5E5E5; // Subtle borders
                             align-items: center;
                             color: $text-main;
                             padding: 4px;
+                            font-size: clamp(0.8rem, 1.2vw, 1rem);
 
                             &:hover {
                                 color: #000;
@@ -132,8 +143,8 @@ $border-color: #E5E5E5; // Subtle borders
                         }
 
                         span {
-                            padding: 0 12px;
-                            font-size: 0.9rem;
+                            padding: 0 clamp(6px, 1vw, 12px);
+                            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
                             font-weight: 500;
                         }
                     }
@@ -143,7 +154,7 @@ $border-color: #E5E5E5; // Subtle borders
                         border: none;
                         text-decoration: underline;
                         color: $text-light;
-                        font-size: 0.85rem;
+                        font-size: clamp(0.75rem, 1.2vw, 0.85rem);
                         cursor: pointer;
                         font-family: var(--font-family-alt);
 
@@ -157,14 +168,14 @@ $border-color: #E5E5E5; // Subtle borders
             .item-price {
                 font-family: var(--font-family-roboto);
                 font-weight: 500;
-                font-size: 1.1rem;
+                font-size: clamp(1rem, 1.5vw, 1.1rem);
                 text-align: right;
 
-                @media (max-width: 600px) {
+                @media (max-width: 768px) {
                     position: absolute;
                     top: 0;
                     right: 0;
-                    font-size: 1rem;
+                    font-size: clamp(0.9rem, 1.2vw, 1rem);
                 }
             }
         }
@@ -174,24 +185,24 @@ $border-color: #E5E5E5; // Subtle borders
     .cart-summary {
         .summary-card {
             background-color: $card-bg;
-            padding: 2rem;
+            padding: clamp(1rem, 2vw, 2rem);
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); // Very subtle shadow
             position: sticky;
-            top: 2rem;
+            top: clamp(1rem, 2vw, 2rem);
 
             h2 {
                 font-family: var(--font-family);
-                font-size: 1.5rem;
-                margin-bottom: 1.5rem;
+                font-size: clamp(1.2rem, 2vw, 1.5rem);
+                margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
                 font-weight: 400;
             }
 
             .summary-row {
                 display: flex;
                 justify-content: space-between;
-                margin-bottom: 1rem;
-                font-size: 0.95rem;
+                margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+                font-size: clamp(0.85rem, 1.2vw, 0.95rem);
                 color: $text-light;
 
                 span:last-child {
@@ -200,7 +211,7 @@ $border-color: #E5E5E5; // Subtle borders
                 }
 
                 &.total {
-                    font-size: 1.2rem;
+                    font-size: clamp(1rem, 1.5vw, 1.2rem);
                     color: $text-main;
                     font-weight: 700;
                     margin-bottom: 0.5rem;
@@ -210,13 +221,13 @@ $border-color: #E5E5E5; // Subtle borders
             .summary-divider {
                 height: 1px;
                 background-color: $border-color;
-                margin: 1.5rem 0;
+                margin: clamp(1rem, 1.5vw, 1.5rem) 0;
             }
 
             .shipping-note {
-                font-size: 0.8rem;
+                font-size: clamp(0.7rem, 1vw, 0.8rem);
                 color: $text-light;
-                margin-bottom: 1.5rem;
+                margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
                 font-family: var(--font-family-alt);
             }
 
@@ -225,9 +236,9 @@ $border-color: #E5E5E5; // Subtle borders
                 background-color: $text-main;
                 color: #fff;
                 border: none;
-                padding: 1rem;
+                padding: clamp(0.75rem, 1.5vw, 1rem);
                 border-radius: 8px;
-                font-size: 1rem;
+                font-size: clamp(0.9rem, 1.2vw, 1rem);
                 cursor: pointer;
                 display: flex;
                 align-items: center;
@@ -255,14 +266,14 @@ $border-color: #E5E5E5; // Subtle borders
         .empty-content {
             h1 {
                 font-family: var(--font-family);
-                font-size: 2.5rem;
-                margin-bottom: 1rem;
+                font-size: clamp(1.5rem, 4vw, 2.5rem);
+                margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
             }
 
             p {
-                font-size: 1.1rem;
+                font-size: clamp(1rem, 1.5vw, 1.1rem);
                 color: $text-light;
-                margin-bottom: 2rem;
+                margin-bottom: clamp(1.5rem, 2vw, 2rem);
             }
 
             .btn-link {
@@ -275,10 +286,22 @@ $border-color: #E5E5E5; // Subtle borders
                 border-bottom: 1px solid $text-main;
                 padding-bottom: 4px;
                 transition: opacity 0.3s;
+                font-size: clamp(0.9rem, 1.2vw, 1rem);
 
                 &:hover {
                     opacity: 0.7;
                 }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 1rem;
+
+        .cart-summary {
+            .summary-card {
+                position: static;
+                margin-top: 1rem;
             }
         }
     }

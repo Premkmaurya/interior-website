@@ -2,20 +2,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--padding-md) var(--padding-lg);
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 1.5rem);
   background-color: #fff;
   font-family: var(--font-family);
   width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+  }
 
   .explore-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    gap: clamp(1rem, 3vw, 2rem);
+    
     h2 {
-      font-size: 2.5rem;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
       font-weight: 800;
-      margin-bottom: 1rem;
+      margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+      flex: 1;
+      min-width: 200px;
     }
 
     .para {
@@ -23,15 +37,17 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-end;
-      gap: 1rem;
-      max-width: 400px;
+      gap: clamp(0.75rem, 1vw, 1rem);
+      max-width: clamp(250px, 90vw, 400px);
+      flex: 1;
+      min-width: 250px;
 
       p {
-        font-size: 1rem;
+        font-size: clamp(0.75rem, 1.5vw, 1rem);
         color: #666;
         font-family: var(--font-family-roboto);
         text-align: right;
-        margin-bottom: 1rem;
+        margin-bottom: clamp(0.5rem, 1vw, 1rem);
       }
 
       .view-more-button {
@@ -39,15 +55,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: var(--padding-md) var(--padding-lg);
-        border: 8px solid whitesmoke;
+        padding: clamp(0.75rem, 1.5vw, 1.2rem) clamp(1rem, 2vw, 1.5rem);
+        border: clamp(4px, 1vw, 8px) solid whitesmoke;
         color: white;
         gap: 8px;
         border-radius: 50px;
         cursor: pointer;
         transition: all 0.3s;
+        white-space: nowrap;
+        font-size: clamp(0.75rem, 1.5vw, 1rem);
+        
         .text {
-          font-size: 1rem;
+          font-size: clamp(0.75rem, 1.5vw, 1rem);
           font-weight: 700;
           letter-spacing: 1px;
         }
@@ -56,21 +75,50 @@
           height: 100%;
           width: fit-content;
           svg {
-            width: 30px;
-            height: 10px;
+            width: clamp(20px, 3vw, 30px);
+            height: clamp(6px, 1.5vw, 10px);
           }
         }
         &:hover {
-          border: 8px solid #b1d8ff;
+          border-color: #b1d8ff;
           background-color: #1b7aff;
         }
         &:active {
-          border: 5px solid #c0dfff;
+          border-width: clamp(2px, 0.75vw, 5px);
+          border-color: #c0dfff;
         }
         &:hover .svg svg {
           animation: jello-vertical 0.9s both;
           transform-origin: left;
         }
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .explore-content {
+      .para {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: clamp(0.75rem, 1.5vw, 1rem);
+    .explore-content {
+      gap: clamp(1rem, 1.5vw, 1.5rem);
+      h2 {
+        font-size: clamp(1.25rem, 3vw, 1.75rem);
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: clamp(0.5rem, 1vw, 0.75rem);
+    .explore-content {
+      h2 {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
       }
     }
   }
@@ -80,66 +128,137 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  min-height: 600px; // Ensure it has a nice height
+  min-height: clamp(400px, 80vh, 600px);
   width: 100%;
-  background-color: #f9f8f3; // The warm cream background from the image
+  background-color: #f9f8f3;
   overflow: hidden;
+  box-sizing: border-box;
 
-  // === LEFT SIDE (CONTENT) ===
   .content-side-wrapper {
     width: 100%;
     height: 100%;
     display: flex;
-    margin-top: 2rem;
+    margin-top: clamp(1rem, 2vw, 2rem);
+    flex-direction: row;
+    flex-wrap: wrap;
+
     .content-side {
-      width: 50%;
+      width: clamp(100%, 50%, 50%);
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 4rem;
+      padding: clamp(1.5rem, 3vw, 4rem);
+      min-width: 250px;
 
       .text-container {
         max-width: 500px;
-        text-align: center; // The reference image has centered text block
+        text-align: center;
 
         .overline {
           display: block;
           font-family: var(--font-family);
-          font-size: 0.75rem;
+          font-size: clamp(0.6rem, 1vw, 0.75rem);
           letter-spacing: 2px;
           text-transform: uppercase;
           color: #555;
-          margin-bottom: 1.5rem;
+          margin-bottom: clamp(1rem, 2vw, 1.5rem);
         }
 
         .heading {
           font-family: var(--font-family);
-          font-size: 1.5rem;
-          font-weight: 400; // Serif headings look better with lighter weight
+          font-size: clamp(1.2rem, 3vw, 1.5rem);
+          font-weight: 400;
           line-height: 1.3;
           color: #1a1a1a;
-          margin-bottom: 2.5rem;
-
-          @media (max-width: 600px) {
-            font-size: 1.75rem;
-          }
+          margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
         }
       }
     }
 
     .image-side {
-      width: 50%;
-      height: 80vh;
+      width: clamp(100%, 50%, 50%);
+      height: clamp(300px, 80vh, 80vh);
       display: flex;
       justify-content: center;
       align-items: center;
+      min-width: 250px;
 
       img {
-        width: 60%;
+        width: clamp(60%, 60%, 100%);
         height: 100%;
         border-radius: var(--border-radius-sm);
-        object-fit: cover; // Ensures image covers the area without stretching
+        object-fit: cover;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .content-side-wrapper {
+      flex-direction: column;
+      margin-top: clamp(0.75rem, 1.5vw, 1rem);
+
+      .content-side {
+        width: 100%;
+        padding: clamp(1.5rem, 2.5vw, 2rem);
+      }
+
+      .image-side {
+        width: 100%;
+        height: clamp(250px, 50vh, 400px);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    .content-side-wrapper {
+      flex-direction: column;
+      margin-top: 0;
+
+      .content-side {
+        width: 100%;
+        padding: clamp(1rem, 2vw, 1.5rem);
+        order: 2;
+
+        .text-container {
+          .heading {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+          }
+        }
+      }
+
+      .image-side {
+        width: 100%;
+        height: clamp(200px, 40vh, 300px);
+        order: 1;
+
+        img {
+          width: 90%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .content-side-wrapper {
+      .content-side {
+        padding: clamp(0.75rem, 1vw, 1rem);
+        .text-container {
+          .heading {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+          }
+          .overline {
+            font-size: clamp(0.6rem, 1vw, 0.65rem);
+          }
+        }
+      }
+
+      .image-side {
+        height: clamp(200px, 40vh, 300px);
+        img {
+          width: 95%;
+        }
       }
     }
   }

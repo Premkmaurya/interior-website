@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { addToCart } from "../../store/slices/cartSlice";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import "./SingleProductPage.scss";
@@ -51,10 +52,14 @@ const SingleProductPage = () => {
   const location = useLocation();
   const product = location.state?.product;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [quantity, setQuantity] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   useScrollToTop();
 
@@ -90,17 +95,56 @@ const SingleProductPage = () => {
     setSelectedImage(null);
   };
 
-  const handleAddToCart = () => {
-    const cartItem = {
-      id: displayProduct.id || id,
-      name: displayProduct.name,
-      image: displayProduct.image,
-      price: displayProduct.price,
-      sku: displayProduct.sku,
-      quantity: quantity,
-    };
-    dispatch(addToCart(cartItem));
-    setQuantity(1); // Reset quantity after adding
+  const handleAddToCart = async () => {
+    // Check if user is logged in
+    if (!isLoggedIn) {
+      setMessage("Please login to add items to cart");
+      navigate("/login");
+      return;
+    }
+
+    if (!displayProduct._id && !displayProduct.id) {
+      setMessage("Product ID not found");
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage("");
+
+    try {
+      const data = await axios.post(
+        "http://localhost:3000/api/cart/add",
+        {
+          productId: displayProduct._id || displayProduct.id,
+          quantity: quantity,
+        },
+        {
+          withCredentials: true, // Include cookies for auth
+        }
+      );
+      
+      // Also update local Redux state
+      const cartItem = {
+        id: displayProduct._id || displayProduct.id,
+        name: displayProduct.name,
+        image: displayProduct.image,
+        price: displayProduct.price,
+        sku: displayProduct.sku,
+        quantity: quantity,
+      };
+      dispatch(addToCart(cartItem));
+      
+      setMessage("✓ Item added to cart successfully!");
+      setQuantity(1); // Reset quantity after adding
+      
+      // Clear message after 2 seconds
+      setTimeout(() => setMessage(""), 2000);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      setMessage(error.message || "Failed to add to cart. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -205,11 +249,20 @@ const SingleProductPage = () => {
               </button>
             </div>
             <div className="button-group">
-              <button className="btn-primary" onClick={handleAddToCart}>
-                ADD TO CART
+              <button 
+                className="btn-primary" 
+                onClick={handleAddToCart}
+                disabled={isLoading}
+              >
+                {isLoading ? "ADDING..." : "ADD TO CART"}
               </button>
               <button className="btn-secondary">WHERE TO BUY</button>
             </div>
+            {message && (
+              <div className={`message ${message.includes("✓") ? "success" : "error"}`}>
+                {message}
+              </div>
+            )}
           </div>
 
           <div className="documentation">

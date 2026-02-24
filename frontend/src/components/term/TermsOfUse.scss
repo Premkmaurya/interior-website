@@ -7,27 +7,37 @@ $font-serif: "Playfair Display", serif; // [cite: 22, 116]
 .terms-wrapper {
   background-color: $bg-ivory;
   color: $text-black;
-  padding: 60px 80px;
+  padding: clamp(2rem, 5vw, 60px) clamp(1.5rem, 6vw, 80px);
   min-height: 100vh;
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    padding: clamp(2rem, 4vw, 40px) clamp(1.5rem, 3vw, 20px);
+  }
 
   @media (max-width: 768px) {
-    padding: 40px 20px;
+    padding: clamp(1.5rem, 3vw, 30px) clamp(1rem, 2vw, 20px);
   }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
+  }
+
   .terms-header {
     border-bottom: 1px solid $divider-beige;
-    padding-bottom: 40px;
-    margin-bottom: 60px;
+    padding-bottom: clamp(2rem, 3vw, 40px);
+    margin-bottom: clamp(2rem, 4vw, 60px);
 
     .legal-nav {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 40px;
+      gap: clamp(0.5rem, 1vw, 8px);
+      margin-bottom: clamp(2rem, 3vw, 40px);
 
       a {
         text-decoration: none;
         color: $text-black;
-        font-size: 11px;
+        font-size: clamp(0.75rem, 1.2vw, 11px);
         font-weight: 700;
         letter-spacing: 1px;
         transition: color 0.3s ease;
@@ -43,41 +53,50 @@ $font-serif: "Playfair Display", serif; // [cite: 22, 116]
 
     .legal-title {
       font-family: $font-serif;
-      font-size: 180px; //
+      font-size: clamp(3rem, 12vw, 180px);
       line-height: 0.8;
       margin: 0;
-      letter-spacing: -5px;
+      letter-spacing: clamp(-2px, -0.5vw, -5px);
 
       @media (max-width: 1024px) {
-        font-size: 100px;
+        font-size: clamp(2rem, 8vw, 100px);
+      }
+
+      @media (max-width: 768px) {
+        font-size: clamp(1.5rem, 6vw, 60px);
       }
     }
   }
 
   .terms-content {
     display: grid;
-    grid-template-columns: 1fr 1fr; // [cite: 29, 84]
-    gap: 100px;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 6vw, 100px);
     max-width: 1400px;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: clamp(2rem, 4vw, 60px);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: clamp(1.5rem, 3vw, 40px);
     }
 
     .policy-block {
-      margin-bottom: 40px;
+      margin-bottom: clamp(2rem, 3vw, 40px);
 
       h3 {
-        font-size: 14px;
+        font-size: clamp(0.85rem, 1.3vw, 14px);
         font-weight: 500;
         text-transform: uppercase;
-        margin-bottom: 15px;
+        margin-bottom: clamp(1rem, 1.5vw, 15px);
       }
 
       p {
-        font-size: 14px;
-        line-height: 1.8; // [cite: 118]
+        font-size: clamp(0.9rem, 1.4vw, 14px);
+        line-height: 1.8;
         color: $text-black;
       }
     }

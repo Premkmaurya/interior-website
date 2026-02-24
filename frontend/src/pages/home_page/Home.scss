@@ -7,6 +7,13 @@
 .container {
   @include center-flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: clamp(1rem, 3vw, 2rem);
   width: 100%;
+  box-sizing: border-box;
+  padding: clamp(0.75rem, 1.5vw, 1.5rem);
+
+  @media (max-width: 480px) {
+    padding: clamp(0.5rem, 1vw, 0.75rem);
+    gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  }
 }

@@ -7,32 +7,55 @@ $border-light: #e5e0d5; // [cite: 112]
 .legal-container {
   background-color: $bg-ivory;
   color: $text-black;
-  padding: 80px 60px 0;
+  padding: clamp(2rem, 6vw, 80px) clamp(1.5rem, 4vw, 60px) 0;
   min-height: 100vh;
   font-family: var(--font-family);
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    padding: clamp(2rem, 4vw, 50px) clamp(1.5rem, 3vw, 40px) 0;
+  }
 
   @media (max-width: 768px) {
-    padding: 40px 20px;
+    padding: clamp(1.5rem, 3vw, 30px) clamp(1rem, 2vw, 20px) 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem 0;
   }
 }
 
 .legal-header {
   display: flex;
   align-items: flex-start;
-  border-bottom: 1px solid $border-light; // [cite: 129]
-  padding-bottom: 60px;
-  margin-bottom: 80px;
+  border-bottom: 1px solid $border-light;
+  padding-bottom: clamp(2rem, 4vw, 60px);
+  margin-bottom: clamp(3rem, 6vw, 80px);
+  gap: clamp(1.5rem, 3vw, 40px);
+  flex-wrap: wrap;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding-bottom: clamp(1.5rem, 3vw, 40px);
+    margin-bottom: clamp(2rem, 4vw, 50px);
+  }
 
   .legal-sidebar {
-    width: 250px;
+    width: clamp(150px, 20vw, 250px);
+    flex-shrink: 0;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
+
     nav {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: clamp(0.75rem, 1.5vw, 12px);
 
       a {
         text-decoration: none;
-        font-size: 11px;
+        font-size: clamp(0.75rem, 1.2vw, 11px);
         font-weight: 700;
         color: $text-black;
         letter-spacing: 1px;
@@ -48,36 +71,48 @@ $border-light: #e5e0d5; // [cite: 112]
 
   .main-title {
     font-family: var(--font-family);
-    font-size: 180px; // Oversized title [cite: 116]
+    font-size: clamp(2.5rem, 12vw, 180px);
     line-height: 0.8;
     margin: 0;
     flex: 1;
-    letter-spacing: -5px;
+    letter-spacing: clamp(-2px, -0.5vw, -5px);
+    min-width: 200px;
 
     @media (max-width: 1024px) {
-      font-size: 100px;
+      font-size: clamp(2rem, 8vw, 100px);
+    }
+
+    @media (max-width: 768px) {
+      font-size: clamp(1.5rem, 6vw, 60px);
     }
   }
 }
 
 .legal-content {
   max-width: 800px;
-  margin: 0 auto 150px; // Generous vertical whitespace [cite: 128]
+  margin: 0 auto clamp(5rem, 10vw, 150px);
+  padding: 0 clamp(1rem, 2vw, 20px);
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    margin: 0 auto clamp(3rem, 6vw, 80px);
+    padding: 0;
+  }
 
   .legal-section {
-    margin-bottom: 60px;
+    margin-bottom: clamp(2rem, 4vw, 60px);
 
     h2 {
-      font-size: 14px;
+      font-size: clamp(0.85rem, 1.3vw, 14px);
       font-weight: 800;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: clamp(1rem, 1.5vw, 20px);
     }
 
     p {
-      font-size: 15px;
+      font-size: clamp(0.9rem, 1.4vw, 15px);
       font-weight: 200;
-      line-height: 1.8; // Generous line-height [cite: 118]
+      line-height: 1.8;
       color: $text-black;
     }
   }

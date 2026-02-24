@@ -7,11 +7,14 @@ $divider-beige: #e5e0d5;
 .contact-wrapper {
   background-color: $bg-ivory;
   color: $text-black;
+  width: 100%;
+  box-sizing: border-box;
+  
   .contact-hero {
-    height: 60vh;
+    height: clamp(40vh, 60vh, 70vh);
     text-align: center;
     color: whitesmoke;
-    border-bottom: 1px solid $divider-beige; // [cite: 112]
+    border-bottom: 1px solid $divider-beige;
     background-image: url("/products/image-4.jpeg");
     background-size: cover;
     background-position: center center;
@@ -20,63 +23,72 @@ $divider-beige: #e5e0d5;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: var(--padding-md) var(--padding-lg);
+    padding: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 3vw, 1.5rem);
 
     .page-title {
       width: 100%;
       font-family: var(--font-family);
-      font-size: 4.5rem;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-      gap: 2rem;
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      letter-spacing: clamp(1px, 0.2vw, 2px);
+      margin-bottom: clamp(1rem, 2vw, 20px);
+      gap: clamp(1rem, 2vw, 2rem);
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
       span:nth-child(2) {
-        height: 4rem;
-        padding-block: 2rem;
+        height: clamp(2rem, 4vw, 4rem);
+        padding-block: clamp(1rem, 2vw, 2rem);
       }
     }
 
     .subtitle {
       font-family: var(--font-family-alt);
-      font-size: 18px;
+      font-size: clamp(1rem, 1.5vw, 18px);
       color: rgb(221, 218, 218);
     }
   }
 
   .channels-section {
-    padding: 80px 0;
+    padding: clamp(2rem, 4vw, 80px) 0;
     max-width: 1100px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 
     .channels-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); // [cite: 138, 182]
-      gap: 60px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: clamp(2rem, 4vw, 60px);
       align-self: center;
-      padding: 0 var(--padding-lg);
+      padding: 0 clamp(1rem, 2vw, 1.5rem);
+      
+      @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
+        gap: clamp(1.5rem, 3vw, 30px);
       }
     }
 
     .channel-item {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: clamp(0.5rem, 1.5vw, 10px);
 
       .dept-name {
-        font-size: 14px;
+        font-size: clamp(0.85rem, 1.2vw, 14px);
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 1px;
-        margin-bottom: 5px;
+        margin-bottom: clamp(0.3rem, 0.75vw, 5px);
       }
 
       .contact-link {
         font-family: var(--font-family-roboto);
-        font-size: 16px;
+        font-size: clamp(0.9rem, 1.5vw, 16px);
         color: $text-gray;
         text-decoration: none;
         transition: color 0.3s ease;
@@ -89,16 +101,20 @@ $divider-beige: #e5e0d5;
   }
 
   .flagship-story {
-    display: flex; // [cite: 145]
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 7rem 0;
+    padding: clamp(3rem, 5vw, 7rem) clamp(1rem, 2vw, 1.5rem);
     border-top: 1px solid $divider-beige;
     width: 100%;
+    gap: clamp(1.5rem, 3vw, 2rem);
+    flex-wrap: wrap;
+    box-sizing: border-box;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       flex-direction: column;
       text-align: center;
+      padding: clamp(2rem, 4vw, 5rem) clamp(1rem, 2vw, 1.5rem);
     }
 
     .story-content {
@@ -106,39 +122,53 @@ $divider-beige: #e5e0d5;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 50%;
+      width: clamp(100%, 50%, 50%);
+      flex: 1;
+      min-width: 250px;
+
       .story-title {
         font-family: var(--font-family);
-        font-size: 40px;
-        margin-bottom: 24px;
+        font-size: clamp(1.5rem, 4vw, 40px);
+        margin-bottom: clamp(1rem, 2vw, 24px);
       }
 
       .story-text {
         font-family: var(--font-family-alt);
-        line-height: 1.8; // [cite: 118]
+        line-height: 1.8;
         color: $text-gray;
-        margin-bottom: 40px;
+        margin-bottom: clamp(2rem, 3vw, 40px);
         text-align: center;
+        font-size: clamp(0.9rem, 1.2vw, 1rem);
       }
 
       .btn-tour {
         background: $text-black;
         color: white;
-        padding: 18px 40px;
+        padding: clamp(12px, 2vw, 18px) clamp(24px, 3vw, 40px);
         border: none;
         font-weight: 700;
         cursor: pointer;
         letter-spacing: 1px;
+        font-size: clamp(0.85rem, 1.2vw, 1rem);
+        border-radius: 4px;
+        transition: all 0.3s;
+
+        &:hover {
+          background: #333;
+          transform: translateY(-2px);
+        }
       }
     }
 
     .story-image {
-      width: 50%;
+      width: clamp(100%, 50%, 55%);
       flex: 1.2;
+      min-width: 250px;
       img {
         width: 100%;
-        height: 500px;
+        height: clamp(250px, 50vh, 500px);
         object-fit: cover;
+        border-radius: 4px;
       }
     }
   }
