@@ -18,11 +18,11 @@ const App = () => {
   }, [])
 
   return (
-    <div>
+    <>
       {!isLoginPage && <Nav />}
       <AppRoute />
       {!isLoginPage && <Footer />}
-    </div>
+    </>
   )
 }
 

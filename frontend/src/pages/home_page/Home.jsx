@@ -11,7 +11,7 @@ const Home = () => {
 
 
   return (
-    <div className="container">
+    <div className="home__container">
       <HeroSection />
       <AboutSection />
       <ProductSection />
